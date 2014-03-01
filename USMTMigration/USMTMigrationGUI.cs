@@ -163,18 +163,29 @@ namespace USMTMigration
               
              You can add arguments to your call through the {YourProcessObject}.StartInfo.Arguments 
             */
-            Process migration = new Process();
-            migration.StartInfo.UseShellExecute = false;
-            migration.StartInfo.RedirectStandardOutput = true;
-            migration.StartInfo.FileName = settings.GetUSMTLocation() + ((isBackup) ? "scanstate.exe" : "loadstate.exe");
-            migration.StartInfo.Arguments = GetArguments();
+            if(USMTExists()){
+                Process migration = new Process();
+                migration.StartInfo.UseShellExecute = false;
+                migration.StartInfo.RedirectStandardOutput = true;
+                migration.StartInfo.FileName = settings.GetUSMTLocation() + ((isBackup) ? "\\scanstate.exe" : "\\loadstate.exe");
+                migration.StartInfo.Arguments = GetArguments();
 
-            //Show what's executed
-            MessageBox.Show(migration.StartInfo.ToString());
+                //migration.StartInfo.UseShellExecute = true;
+                //migration.StartInfo.Arguments = "ipconfig";
+                //migration.StartInfo.FileName = "C:\\Windows\\System32\\cmd.exe";
 
-            migration.Start();
-            string output = migration.StandardOutput.ReadToEnd();
-            migration.WaitForExit();
+                //Show what's executed
+                MessageBox.Show(migration.StartInfo.FileName);
+
+                migration.Start();
+                //string output = migration.StandardOutput.ReadToEnd();
+                //migration.WaitForExit();
+            }
+            else
+            {
+                MessageBox.Show("Missing USMT tools in: " + settings.GetUSMTLocation());
+            }
+
 
         }
 
@@ -196,6 +207,9 @@ namespace USMTMigration
         }
 
 
-
+        private bool USMTExists()
+        {
+            return Directory.Exists(settings.GetUSMTLocation());
+        }
     }
 }

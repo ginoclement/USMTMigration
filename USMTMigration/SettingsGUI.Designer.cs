@@ -148,7 +148,7 @@
             // OverwriteCheckbox
             // 
             this.OverwriteCheckbox.AutoSize = true;
-            this.OverwriteCheckbox.Location = new System.Drawing.Point(15, 189);
+            this.OverwriteCheckbox.Location = new System.Drawing.Point(12, 189);
             this.OverwriteCheckbox.Name = "OverwriteCheckbox";
             this.OverwriteCheckbox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.OverwriteCheckbox.Size = new System.Drawing.Size(223, 17);
