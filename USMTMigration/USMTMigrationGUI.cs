@@ -167,19 +167,16 @@ namespace USMTMigration
                 Process migration = new Process();
                 migration.StartInfo.UseShellExecute = false;
                 migration.StartInfo.RedirectStandardOutput = true;
-                migration.StartInfo.FileName = settings.GetUSMTLocation() + ((isBackup) ? "\\scanstate.exe" : "\\loadstate.exe");
-                migration.StartInfo.Arguments = GetArguments();
-
-                //migration.StartInfo.UseShellExecute = true;
-                //migration.StartInfo.Arguments = "ipconfig";
-                //migration.StartInfo.FileName = "C:\\Windows\\System32\\cmd.exe";
+                migration.StartInfo.FileName = settings.GetUSMTLocation() + ((isBackup) ? "\\scanstate.bat" : "\\loadstate.bat");
+                //migration.StartInfo.Arguments = GetArguments();
 
                 //Show what's executed
-                MessageBox.Show(migration.StartInfo.FileName);
-
+                //MessageBox.Show(migration.StartInfo.FileName);
                 migration.Start();
-                //string output = migration.StandardOutput.ReadToEnd();
-                //migration.WaitForExit();
+                migration.WaitForExit();
+
+                //Close the program
+                this.Close();
             }
             else
             {

@@ -20,13 +20,20 @@ namespace USMTMigration
 
         public Settings()
         {
-            this.backupLocation = "C:\\Fake\\Backup\\Location\\";
-            this.logLocation = "C:\\Fake\\Log\\Location\\";
-            this.arguments = "/i:migapp.xml /i:miguser.xml /v:13 /c";
-            this.computerName = System.Environment.MachineName;
-            this.overwrite = true;
-            this.usmtLocation = Directory.GetCurrentDirectory();
-            this.domain = "DOMAIN";
+            if (File.Exists("options.txt"))
+            {
+                string[] lines = System.IO.File.ReadAllLines("options.txt");
+            }
+            else
+            {
+                this.backupLocation = "C:\\Fake\\Backup\\Location\\";
+                this.logLocation = "C:\\Fake\\Log\\Location\\";
+                this.arguments = "/i:migapp.xml /i:miguser.xml /v:13 /c";
+                this.computerName = System.Environment.MachineName;
+                this.overwrite = true;
+                this.usmtLocation = "C:\\Users\\Gino Clement\\Desktop"; //Directory.GetCurrentDirectory();
+                this.domain = "DOMAIN";
+            }
         }
 
 
@@ -49,7 +56,7 @@ namespace USMTMigration
 
         public uint GetDate()
         {
-            return (olderThan == null) ? 0 : olderThan;
+            return olderThan;
         }
 
         public string GetDomain()
