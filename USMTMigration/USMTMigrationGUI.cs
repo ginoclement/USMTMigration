@@ -92,36 +92,36 @@ namespace USMTMigration
             //string arguments = (isBackup) ? settings.GetBackupLocation() + ((settings.OverwriteArgument()) ? " /o" : "") : "";
             string arguments = "";
             if(isBackup){
-                arguments += settings.GetBackupLocation();
+                arguments += settings.backupLocation;
 
                 //God this is ugly
                 //arguments += (settings.OverwriteArgument()) ? " /o" : "";
                 //arguments += (settings.GetDate() > 0) ? " /uel:" + settings.GetDate() : ""; 
 
                 //Or should I use this
-                if (settings.OverwriteArgument())
+                if (settings.overwrite)
                 {
                     arguments += " /o";
                 }
-                if(settings.GetDate() > 0)
+                if(settings.profilesOlderThan > 0)
                 {
-                    arguments += " /uel:" + settings.GetDate();
+                    arguments += " /uel:" + settings.profilesOlderThan;
                 }
 
                 foreach (string profile in ProfilesList.CheckedItems)
                 {
                     // /ui:farwest\user2
                     string temp = profile.Replace("C:\\Users\\", "");
-                    arguments += " /ui:" + settings.GetDomain() + "\\" + temp;
+                    arguments += " /ui:" + settings.domain + "\\" + temp;
                 }
             }
             else
             {
-                arguments += settings.GetBackupLocation() + RestoreComputerText.Text;
+                arguments += settings.backupLocation + RestoreComputerText.Text;
                 arguments += " /all";
             }
-            arguments += " " + settings.GetArguments();
-            arguments += " /l:" + settings.GetLogLocation() + settings.GetComputerName() + ((isBackup) ? "_scan.log" : "_load.log");
+            arguments += " " + settings.arguments;
+            arguments += " /l:" + settings.logLocation + settings.computerName + ((isBackup) ? "_scan.log" : "_load.log");
 
 
 
@@ -134,79 +134,52 @@ namespace USMTMigration
         private void TransferButton_Click(object sender, EventArgs e)
         {
             Transfer();
-                //if (isBackup)
-                //{
-                //    Backup();
-                //}
-                //else
-                //{
-                //    Restore();
-                //}
         }
 
         private void Transfer()
         {
-            /*
-                 // Start the child process.
-                 Process p = new Process();
-                 // Redirect the output stream of the child process.
-                 p.StartInfo.UseShellExecute = false;
-                 p.StartInfo.RedirectStandardOutput = true;
-                 p.StartInfo.FileName = "YOURBATCHFILE.bat";
-                 p.Start();
-                 // Do not wait for the child process to exit before
-                 // reading to the end of its redirected stream.
-                 // p.WaitForExit();
-                 // Read the output stream first and then wait.
-                 string output = p.StandardOutput.ReadToEnd();
-                 p.WaitForExit();
-              
-             You can add arguments to your call through the {YourProcessObject}.StartInfo.Arguments 
-            */
-            if(USMTExists()){
-                Process migration = new Process();
-                migration.StartInfo.UseShellExecute = false;
-                migration.StartInfo.RedirectStandardOutput = true;
-                migration.StartInfo.FileName = settings.GetUSMTLocation() + ((isBackup) ? "\\scanstate.bat" : "\\loadstate.bat");
-                //migration.StartInfo.Arguments = GetArguments();
+            USMTExists();
+            Process migration = new Process();
+            migration.StartInfo.UseShellExecute = true;
+            migration.StartInfo.RedirectStandardOutput = false;
+            migration.StartInfo.FileName = settings.localUSMTLocation + ((isBackup) ? "\\scanstate.bat" : "\\loadstate.bat");
+            migration.StartInfo.Arguments = GetArguments();
 
-                //Show what's executed
-                //MessageBox.Show(migration.StartInfo.FileName);
-                migration.Start();
-                migration.WaitForExit();
-
-                //Close the program
-                this.Close();
-            }
-            else
-            {
-                MessageBox.Show("Missing USMT tools in: " + settings.GetUSMTLocation());
-            }
-
+            //Show what's executed
+            //MessageBox.Show(migration.StartInfo.FileName);
+            migration.Start();
+            //string output = migration.StandardOutput.ReadLine();
+            //MessageBox.Show(output);
+            //Close the program
+            migration.WaitForExit();
+            this.Close();
 
         }
-
-        //private void Backup()
-        //{
-        //    //Execute Scanstate
-        //}
-
-        //private void Restore()
-        //{
-        //    //Execute Loadstate
-        //}
 
         //Show command to be executed when transfer is clicked
         private void ArgumentsButton_Click(object sender, EventArgs e)
         {
-            string text = settings.GetUSMTLocation() + ((isBackup) ? "\\scanstate.exe " : "\\loadstate.exe ") + GetArguments();
+            string text = settings.localUSMTLocation + ((isBackup) ? "\\scanstate.exe " : "\\loadstate.exe ") + GetArguments();
             MessageBox.Show(text);
         }
 
-
-        private bool USMTExists()
+        //Check to see if USMT files are present on the local machine in the designated folder, otherwise copy them
+        private void USMTExists()
         {
-            return Directory.Exists(settings.GetUSMTLocation());
+            if (!Directory.Exists(settings.localUSMTLocation))
+            {
+                string[] files = System.IO.Directory.GetFiles(settings.remoteUSMTLocation);
+
+                // Copy the files and overwrite destination files if they already exist. 
+                foreach (string s in files)
+                {
+                      //Use static Path methods to extract only the file name from the path.
+                      String fileName = System.IO.Path.GetFileName(s);
+                      String destFile = System.IO.Path.Combine(settings.localUSMTLocation, fileName);
+                      System.IO.File.Copy(s, destFile, true);
+                }
+                
+            }
         }
     }
 }

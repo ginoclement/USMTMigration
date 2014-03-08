@@ -40,8 +40,8 @@
             this.ComputerNameText = new System.Windows.Forms.TextBox();
             this.LookUpArgumentsLabel = new System.Windows.Forms.LinkLabel();
             this.OverwriteCheckbox = new System.Windows.Forms.CheckBox();
-            this.USMTLocationLabel = new System.Windows.Forms.Label();
-            this.USMTLocationText = new System.Windows.Forms.TextBox();
+            this.LocalUSMTLocationLabel = new System.Windows.Forms.Label();
+            this.LocalUSMTLocationText = new System.Windows.Forms.TextBox();
             this.DomainLabel = new System.Windows.Forms.Label();
             this.DomainText = new System.Windows.Forms.TextBox();
             this.OlderThan = new System.Windows.Forms.NumericUpDown();
@@ -156,21 +156,21 @@
             this.OverwriteCheckbox.Text = "Overwrite existing backups. (/o argument)";
             this.OverwriteCheckbox.UseVisualStyleBackColor = true;
             // 
-            // USMTLocationLabel
+            // LocalUSMTLocationLabel
             // 
-            this.USMTLocationLabel.AutoSize = true;
-            this.USMTLocationLabel.Location = new System.Drawing.Point(12, 87);
-            this.USMTLocationLabel.Name = "USMTLocationLabel";
-            this.USMTLocationLabel.Size = new System.Drawing.Size(85, 13);
-            this.USMTLocationLabel.TabIndex = 12;
-            this.USMTLocationLabel.Text = "USMT Location:";
+            this.LocalUSMTLocationLabel.AutoSize = true;
+            this.LocalUSMTLocationLabel.Location = new System.Drawing.Point(12, 87);
+            this.LocalUSMTLocationLabel.Name = "LocalUSMTLocationLabel";
+            this.LocalUSMTLocationLabel.Size = new System.Drawing.Size(114, 13);
+            this.LocalUSMTLocationLabel.TabIndex = 12;
+            this.LocalUSMTLocationLabel.Text = "Local USMT Location:";
             // 
-            // USMTLocationText
+            // LocalUSMTLocationText
             // 
-            this.USMTLocationText.Location = new System.Drawing.Point(109, 84);
-            this.USMTLocationText.Name = "USMTLocationText";
-            this.USMTLocationText.Size = new System.Drawing.Size(237, 20);
-            this.USMTLocationText.TabIndex = 13;
+            this.LocalUSMTLocationText.Location = new System.Drawing.Point(109, 84);
+            this.LocalUSMTLocationText.Name = "LocalUSMTLocationText";
+            this.LocalUSMTLocationText.Size = new System.Drawing.Size(237, 20);
+            this.LocalUSMTLocationText.TabIndex = 13;
             // 
             // DomainLabel
             // 
@@ -226,8 +226,8 @@
             this.Controls.Add(this.OlderThan);
             this.Controls.Add(this.DomainText);
             this.Controls.Add(this.DomainLabel);
-            this.Controls.Add(this.USMTLocationText);
-            this.Controls.Add(this.USMTLocationLabel);
+            this.Controls.Add(this.LocalUSMTLocationText);
+            this.Controls.Add(this.LocalUSMTLocationLabel);
             this.Controls.Add(this.OverwriteCheckbox);
             this.Controls.Add(this.LookUpArgumentsLabel);
             this.Controls.Add(this.ComputerNameText);
@@ -264,8 +264,8 @@
         private System.Windows.Forms.TextBox ComputerNameText;
         private System.Windows.Forms.LinkLabel LookUpArgumentsLabel;
         private System.Windows.Forms.CheckBox OverwriteCheckbox;
-        private System.Windows.Forms.Label USMTLocationLabel;
-        private System.Windows.Forms.TextBox USMTLocationText;
+        private System.Windows.Forms.Label LocalUSMTLocationLabel;
+        private System.Windows.Forms.TextBox LocalUSMTLocationText;
         private System.Windows.Forms.Label DomainLabel;
         private System.Windows.Forms.TextBox DomainText;
         private System.Windows.Forms.NumericUpDown OlderThan;

@@ -20,14 +20,14 @@ namespace USMTMigration
             this.settings = settings;
 
             //Initialize textbox values
-            BackupLocationText.Text = settings.GetBackupLocation();
-            LogLocationText.Text = settings.GetLogLocation();
-            ArgumentsText.Text = settings.GetArguments();
-            ComputerNameText.Text = settings.GetComputerName();
-            OverwriteCheckbox.Checked = settings.OverwriteArgument();
-            USMTLocationText.Text = settings.GetUSMTLocation();
-            DomainText.Text = settings.GetDomain();
-            OlderThan.Value = settings.GetDate();
+            BackupLocationText.Text = settings.backupLocation;
+            LogLocationText.Text = settings.logLocation;
+            ArgumentsText.Text = settings.arguments;
+            ComputerNameText.Text = settings.computerName;
+            OverwriteCheckbox.Checked = settings.overwrite;
+            LocalUSMTLocationText.Text = settings.localUSMTLocation;
+            DomainText.Text = settings.domain;
+            OlderThan.Value = settings.profilesOlderThan;
         }
 
         private void CloseButton_Click(object sender, EventArgs e)
@@ -37,14 +37,14 @@ namespace USMTMigration
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
-            settings.SetBackupLocation(BackupLocationText.Text);
-            settings.SetLogLocation(LogLocationText.Text);
-            settings.SetArguments(ArgumentsText.Text);
-            settings.SetComputerName(ComputerNameText.Text);
-            settings.SetOverwriteArgument(OverwriteCheckbox.Checked);
-            settings.SetUSMTLocation(USMTLocationText.Text);
-            settings.SetDomain(DomainText.Text);
-            settings.SetDate((uint) OlderThan.Value);
+            settings.backupLocation = BackupLocationText.Text;
+            settings.logLocation = LogLocationText.Text;
+            settings.arguments = ArgumentsText.Text;
+            settings.computerName = ComputerNameText.Text;
+            settings.overwrite = OverwriteCheckbox.Checked;
+            settings.localUSMTLocation = LocalUSMTLocationText.Text;
+            settings.domain = DomainText.Text;
+            settings.profilesOlderThan = (uint) OlderThan.Value;
 
             this.Close();
         }
