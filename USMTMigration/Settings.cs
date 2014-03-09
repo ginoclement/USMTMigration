@@ -22,7 +22,12 @@ namespace USMTMigration
         public Settings()
         {
             //Create a data structure with all settings, check if a settings exists, otherwise use default
-            if (File.Exists("options.txt"))
+            
+            //Might need to restructure how data is saved?
+                //Stored in a map?
+                //Store in a list of some type and check if it exists?
+                    //Ternary operator for setting values.
+            if (File.Exists(backupLocation + "options.txt"))
             {
                 string[] lines = System.IO.File.ReadAllLines("options.txt");
             }

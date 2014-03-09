@@ -23,6 +23,7 @@ namespace USMTMigration
             InitializeComponent();
             settings = new Settings();
             TransferButton.Enabled = ArgumentsButton.Enabled = false;
+            USMTExists();
         }
 
         private void Settings_Click(object sender, EventArgs e)
@@ -138,7 +139,6 @@ namespace USMTMigration
 
         private void Transfer()
         {
-            USMTExists();
             Process migration = new Process();
             migration.StartInfo.UseShellExecute = true;
             migration.StartInfo.RedirectStandardOutput = false;

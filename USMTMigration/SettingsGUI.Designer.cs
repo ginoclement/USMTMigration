@@ -47,12 +47,14 @@
             this.OlderThan = new System.Windows.Forms.NumericUpDown();
             this.OlderThanLabel = new System.Windows.Forms.Label();
             this.DaysLabel = new System.Windows.Forms.Label();
+            this.RemoteUSMTLocationLabel = new System.Windows.Forms.Label();
+            this.RemoteUSMTLocationText = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.OlderThan)).BeginInit();
             this.SuspendLayout();
             // 
             // BackupLocationText
             // 
-            this.BackupLocationText.Location = new System.Drawing.Point(109, 32);
+            this.BackupLocationText.Location = new System.Drawing.Point(182, 32);
             this.BackupLocationText.Name = "BackupLocationText";
             this.BackupLocationText.Size = new System.Drawing.Size(237, 20);
             this.BackupLocationText.TabIndex = 0;
@@ -77,14 +79,14 @@
             // 
             // LogLocationText
             // 
-            this.LogLocationText.Location = new System.Drawing.Point(109, 58);
+            this.LogLocationText.Location = new System.Drawing.Point(182, 58);
             this.LogLocationText.Name = "LogLocationText";
             this.LogLocationText.Size = new System.Drawing.Size(237, 20);
             this.LogLocationText.TabIndex = 3;
             // 
             // SaveButton
             // 
-            this.SaveButton.Location = new System.Drawing.Point(316, 226);
+            this.SaveButton.Location = new System.Drawing.Point(316, 476);
             this.SaveButton.Name = "SaveButton";
             this.SaveButton.Size = new System.Drawing.Size(75, 23);
             this.SaveButton.TabIndex = 4;
@@ -94,7 +96,7 @@
             // 
             // CloseButton
             // 
-            this.CloseButton.Location = new System.Drawing.Point(397, 226);
+            this.CloseButton.Location = new System.Drawing.Point(397, 476);
             this.CloseButton.Name = "CloseButton";
             this.CloseButton.Size = new System.Drawing.Size(75, 23);
             this.CloseButton.TabIndex = 5;
@@ -104,7 +106,7 @@
             // 
             // ArgumentsText
             // 
-            this.ArgumentsText.Location = new System.Drawing.Point(109, 137);
+            this.ArgumentsText.Location = new System.Drawing.Point(182, 387);
             this.ArgumentsText.Name = "ArgumentsText";
             this.ArgumentsText.Size = new System.Drawing.Size(237, 20);
             this.ArgumentsText.TabIndex = 6;
@@ -112,7 +114,7 @@
             // ArgumentsLabel
             // 
             this.ArgumentsLabel.AutoSize = true;
-            this.ArgumentsLabel.Location = new System.Drawing.Point(12, 140);
+            this.ArgumentsLabel.Location = new System.Drawing.Point(12, 390);
             this.ArgumentsLabel.Name = "ArgumentsLabel";
             this.ArgumentsLabel.Size = new System.Drawing.Size(60, 13);
             this.ArgumentsLabel.TabIndex = 7;
@@ -129,7 +131,7 @@
             // 
             // ComputerNameText
             // 
-            this.ComputerNameText.Location = new System.Drawing.Point(109, 6);
+            this.ComputerNameText.Location = new System.Drawing.Point(182, 6);
             this.ComputerNameText.Name = "ComputerNameText";
             this.ComputerNameText.Size = new System.Drawing.Size(237, 20);
             this.ComputerNameText.TabIndex = 9;
@@ -137,7 +139,7 @@
             // LookUpArgumentsLabel
             // 
             this.LookUpArgumentsLabel.AutoSize = true;
-            this.LookUpArgumentsLabel.Location = new System.Drawing.Point(351, 140);
+            this.LookUpArgumentsLabel.Location = new System.Drawing.Point(424, 390);
             this.LookUpArgumentsLabel.Name = "LookUpArgumentsLabel";
             this.LookUpArgumentsLabel.Size = new System.Drawing.Size(48, 13);
             this.LookUpArgumentsLabel.TabIndex = 10;
@@ -148,7 +150,7 @@
             // OverwriteCheckbox
             // 
             this.OverwriteCheckbox.AutoSize = true;
-            this.OverwriteCheckbox.Location = new System.Drawing.Point(12, 189);
+            this.OverwriteCheckbox.Location = new System.Drawing.Point(12, 439);
             this.OverwriteCheckbox.Name = "OverwriteCheckbox";
             this.OverwriteCheckbox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.OverwriteCheckbox.Size = new System.Drawing.Size(223, 17);
@@ -167,7 +169,7 @@
             // 
             // LocalUSMTLocationText
             // 
-            this.LocalUSMTLocationText.Location = new System.Drawing.Point(109, 84);
+            this.LocalUSMTLocationText.Location = new System.Drawing.Point(182, 84);
             this.LocalUSMTLocationText.Name = "LocalUSMTLocationText";
             this.LocalUSMTLocationText.Size = new System.Drawing.Size(237, 20);
             this.LocalUSMTLocationText.TabIndex = 13;
@@ -175,7 +177,7 @@
             // DomainLabel
             // 
             this.DomainLabel.AutoSize = true;
-            this.DomainLabel.Location = new System.Drawing.Point(12, 114);
+            this.DomainLabel.Location = new System.Drawing.Point(12, 364);
             this.DomainLabel.Name = "DomainLabel";
             this.DomainLabel.Size = new System.Drawing.Size(46, 13);
             this.DomainLabel.TabIndex = 14;
@@ -183,14 +185,14 @@
             // 
             // DomainText
             // 
-            this.DomainText.Location = new System.Drawing.Point(109, 111);
+            this.DomainText.Location = new System.Drawing.Point(182, 361);
             this.DomainText.Name = "DomainText";
             this.DomainText.Size = new System.Drawing.Size(237, 20);
             this.DomainText.TabIndex = 15;
             // 
             // OlderThan
             // 
-            this.OlderThan.Location = new System.Drawing.Point(188, 163);
+            this.OlderThan.Location = new System.Drawing.Point(188, 413);
             this.OlderThan.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -203,7 +205,7 @@
             // OlderThanLabel
             // 
             this.OlderThanLabel.AutoSize = true;
-            this.OlderThanLabel.Location = new System.Drawing.Point(12, 165);
+            this.OlderThanLabel.Location = new System.Drawing.Point(12, 415);
             this.OlderThanLabel.Name = "OlderThanLabel";
             this.OlderThanLabel.Size = new System.Drawing.Size(170, 13);
             this.OlderThanLabel.TabIndex = 17;
@@ -212,15 +214,33 @@
             // DaysLabel
             // 
             this.DaysLabel.AutoSize = true;
-            this.DaysLabel.Location = new System.Drawing.Point(242, 165);
+            this.DaysLabel.Location = new System.Drawing.Point(242, 415);
             this.DaysLabel.Name = "DaysLabel";
             this.DaysLabel.Size = new System.Drawing.Size(32, 13);
             this.DaysLabel.TabIndex = 18;
             this.DaysLabel.Text = "days.";
             // 
+            // RemoteUSMTLocationLabel
+            // 
+            this.RemoteUSMTLocationLabel.AutoSize = true;
+            this.RemoteUSMTLocationLabel.Location = new System.Drawing.Point(12, 113);
+            this.RemoteUSMTLocationLabel.Name = "RemoteUSMTLocationLabel";
+            this.RemoteUSMTLocationLabel.Size = new System.Drawing.Size(125, 13);
+            this.RemoteUSMTLocationLabel.TabIndex = 19;
+            this.RemoteUSMTLocationLabel.Text = "Remote USMT Location:";
+            // 
+            // RemoteUSMTLocationText
+            // 
+            this.RemoteUSMTLocationText.Location = new System.Drawing.Point(182, 110);
+            this.RemoteUSMTLocationText.Name = "RemoteUSMTLocationText";
+            this.RemoteUSMTLocationText.Size = new System.Drawing.Size(237, 20);
+            this.RemoteUSMTLocationText.TabIndex = 20;
+            // 
             // SettingsGUI
             // 
-            this.ClientSize = new System.Drawing.Size(484, 261);
+            this.ClientSize = new System.Drawing.Size(484, 561);
+            this.Controls.Add(this.RemoteUSMTLocationText);
+            this.Controls.Add(this.RemoteUSMTLocationLabel);
             this.Controls.Add(this.DaysLabel);
             this.Controls.Add(this.OlderThanLabel);
             this.Controls.Add(this.OlderThan);
@@ -271,6 +291,8 @@
         private System.Windows.Forms.NumericUpDown OlderThan;
         private System.Windows.Forms.Label OlderThanLabel;
         private System.Windows.Forms.Label DaysLabel;
+        private System.Windows.Forms.Label RemoteUSMTLocationLabel;
+        private System.Windows.Forms.TextBox RemoteUSMTLocationText;
 
     }
 }

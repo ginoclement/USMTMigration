@@ -26,6 +26,7 @@ namespace USMTMigration
             ComputerNameText.Text = settings.computerName;
             OverwriteCheckbox.Checked = settings.overwrite;
             LocalUSMTLocationText.Text = settings.localUSMTLocation;
+            RemoteUSMTLocationText.Text = settings.remoteUSMTLocation;
             DomainText.Text = settings.domain;
             OlderThan.Value = settings.profilesOlderThan;
         }
@@ -43,6 +44,7 @@ namespace USMTMigration
             settings.computerName = ComputerNameText.Text;
             settings.overwrite = OverwriteCheckbox.Checked;
             settings.localUSMTLocation = LocalUSMTLocationText.Text;
+            settings.remoteUSMTLocation = RemoteUSMTLocationText.Text;
             settings.domain = DomainText.Text;
             settings.profilesOlderThan = (uint) OlderThan.Value;
 
