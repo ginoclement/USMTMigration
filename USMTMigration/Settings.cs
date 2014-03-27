@@ -21,27 +21,14 @@ namespace USMTMigration
 
         public Settings()
         {
-            //Create a data structure with all settings, check if a settings exists, otherwise use default
-            
-            //Might need to restructure how data is saved?
-                //Stored in a map?
-                //Store in a list of some type and check if it exists?
-                    //Ternary operator for setting values.
-            if (File.Exists(backupLocation + "options.txt"))
-            {
-                string[] lines = System.IO.File.ReadAllLines("options.txt");
-            }
-            else
-            {
-                this.backupLocation = "C:\\Fake\\Backup\\Location\\";
-                this.logLocation = "C:\\Fake\\Log\\Location\\";
-                this.arguments = "/i:migapp.xml /i:miguser.xml /v:13 /c";
-                this.computerName = System.Environment.MachineName;
-                this.overwrite = true;
-                this.localUSMTLocation = "C:\\"; //"C:\\Users\\Gino Clement\\Desktop"; //Directory.GetCurrentDirectory();
-                this.remoteUSMTLocation = "C:\\Users\\Gino Clement\\Desktop\\SomeRemoteLocation";
-                this.domain = "DOMAIN";
-            }
+            this.backupLocation = "C:\\Fake\\Backup\\Location\\";
+            this.logLocation = "C:\\Fake\\Log\\Location\\";
+            this.arguments = "/i:migapp.xml /i:miguser.xml /v:13 /c";
+            this.computerName = System.Environment.MachineName;
+            this.overwrite = true;
+            this.localUSMTLocation = "C:\\"; //"C:\\Users\\Gino Clement\\Desktop"; //Directory.GetCurrentDirectory();
+            this.remoteUSMTLocation = "C:\\Users\\Gino Clement\\Desktop\\SomeRemoteLocation";
+            this.domain = "DOMAIN";
         }
 
     }

@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices; 
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -18,12 +19,17 @@ namespace USMTMigration
         private Settings settings;
         private bool isBackup;
 
+        //Log out method... I don't know if this works.
+        [DllImport("user32")]
+        public static extern bool ExitWindowsEx(uint uFlags, uint dwReason);
+
         public USMTMigrationGUI()
         {
             InitializeComponent();
             settings = new Settings();
             TransferButton.Enabled = ArgumentsButton.Enabled = false;
             USMTExists();
+            OptionsExists();
         }
 
         private void Settings_Click(object sender, EventArgs e)
@@ -145,14 +151,14 @@ namespace USMTMigration
             migration.StartInfo.FileName = settings.localUSMTLocation + ((isBackup) ? "\\scanstate.bat" : "\\loadstate.bat");
             migration.StartInfo.Arguments = GetArguments();
 
-            //Show what's executed
-            //MessageBox.Show(migration.StartInfo.FileName);
             migration.Start();
             //string output = migration.StandardOutput.ReadLine();
-            //MessageBox.Show(output);
             //Close the program
             migration.WaitForExit();
             this.Close();
+
+            //This is supposed to execute Windows Logout
+            //ExitWindowsEx(0, 0);
 
         }
 
@@ -180,6 +186,22 @@ namespace USMTMigration
                 }
                 
             }
+            OptionsExists();
         }
+
+        //Check for options.txt and if it exists, initializes variables
+        private void OptionsExists()
+        {
+            Console.WriteLine(settings.localUSMTLocation + "options.txt");
+            if (File.Exists(settings.localUSMTLocation + "options.txt"))
+            {
+                Console.WriteLine("Found it");
+            }
+        }
+
+
+
+
+
     }
 }
