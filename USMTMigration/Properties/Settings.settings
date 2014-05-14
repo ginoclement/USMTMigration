@@ -1,7 +1,33 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="USMTMigration.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="BackupLoc" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Users\iguest\Desktop\Backup</Value>
+    </Setting>
+    <Setting Name="LogLoc" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Users\iguest\Desktop\Logs</Value>
+    </Setting>
+    <Setting Name="Arguments" Type="System.String" Scope="User">
+      <Value Profile="(Default)">/i:migapp.xml /i:miguser.xml /v:13 /c</Value>
+    </Setting>
+    <Setting Name="ComputerName" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Overwrite" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="LocalUSMTLoc" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Users\iguest\Desktop\Local USMT</Value>
+    </Setting>
+    <Setting Name="RemoteUSMTLoc" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Users\iguest\Desktop\Remote USMT</Value>
+    </Setting>
+    <Setting Name="Domain" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="DaysToSave" Type="System.UInt32" Scope="User">
+      <Value Profile="(Default)">30</Value>
+    </Setting>
+  </Settings>
 </SettingsFile>

@@ -12,23 +12,21 @@ namespace USMTMigration
 {
     public partial class SettingsGUI : Form
     {
-        private Settings settings;
 
-        public SettingsGUI(Settings settings)
+        public SettingsGUI()
         {
             InitializeComponent();
-            this.settings = settings;
 
-            //Initialize textbox values
-            BackupLocationText.Text = settings.backupLocation;
-            LogLocationText.Text = settings.logLocation;
-            ArgumentsText.Text = settings.arguments;
-            ComputerNameText.Text = settings.computerName;
-            OverwriteCheckbox.Checked = settings.overwrite;
-            LocalUSMTLocationText.Text = settings.localUSMTLocation;
-            RemoteUSMTLocationText.Text = settings.remoteUSMTLocation;
-            DomainText.Text = settings.domain;
-            OlderThan.Value = settings.profilesOlderThan;
+            BackupLocationText.Text = Properties.Settings.Default.BackupLoc;
+            LogLocationText.Text = Properties.Settings.Default.LogLoc;
+            ArgumentsText.Text = Properties.Settings.Default.Arguments;
+            ComputerNameText.Text = Properties.Settings.Default.ComputerName;
+            OverwriteCheckbox.Checked = Properties.Settings.Default.Overwrite;
+            LocalUSMTLocationText.Text = Properties.Settings.Default.LocalUSMTLoc;
+            RemoteUSMTLocationText.Text = Properties.Settings.Default.RemoteUSMTLoc;
+            DomainText.Text = Properties.Settings.Default.Domain;
+            OlderThan.Value = Properties.Settings.Default.DaysToSave;
+
         }
 
         private void CloseButton_Click(object sender, EventArgs e)
@@ -38,15 +36,15 @@ namespace USMTMigration
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
-            settings.backupLocation = BackupLocationText.Text;
-            settings.logLocation = LogLocationText.Text;
-            settings.arguments = ArgumentsText.Text;
-            settings.computerName = ComputerNameText.Text;
-            settings.overwrite = OverwriteCheckbox.Checked;
-            settings.localUSMTLocation = LocalUSMTLocationText.Text;
-            settings.remoteUSMTLocation = RemoteUSMTLocationText.Text;
-            settings.domain = DomainText.Text;
-            settings.profilesOlderThan = (uint) OlderThan.Value;
+            Properties.Settings.Default.BackupLoc = BackupLocationText.Text;
+            Properties.Settings.Default.LogLoc = LogLocationText.Text;
+            Properties.Settings.Default.Arguments = ArgumentsText.Text;
+            Properties.Settings.Default.ComputerName = ComputerNameText.Text;
+            Properties.Settings.Default.Overwrite = OverwriteCheckbox.Checked;
+            Properties.Settings.Default.LocalUSMTLoc = LocalUSMTLocationText.Text;
+            Properties.Settings.Default.RemoteUSMTLoc = RemoteUSMTLocationText.Text;
+            Properties.Settings.Default.Domain = DomainText.Text;
+            Properties.Settings.Default.DaysToSave = (uint)OlderThan.Value;
 
             this.Close();
         }

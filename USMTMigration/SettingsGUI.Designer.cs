@@ -86,7 +86,7 @@
             // 
             // SaveButton
             // 
-            this.SaveButton.Location = new System.Drawing.Point(316, 476);
+            this.SaveButton.Location = new System.Drawing.Point(263, 251);
             this.SaveButton.Name = "SaveButton";
             this.SaveButton.Size = new System.Drawing.Size(75, 23);
             this.SaveButton.TabIndex = 4;
@@ -96,7 +96,7 @@
             // 
             // CloseButton
             // 
-            this.CloseButton.Location = new System.Drawing.Point(397, 476);
+            this.CloseButton.Location = new System.Drawing.Point(344, 251);
             this.CloseButton.Name = "CloseButton";
             this.CloseButton.Size = new System.Drawing.Size(75, 23);
             this.CloseButton.TabIndex = 5;
@@ -106,7 +106,7 @@
             // 
             // ArgumentsText
             // 
-            this.ArgumentsText.Location = new System.Drawing.Point(182, 387);
+            this.ArgumentsText.Location = new System.Drawing.Point(182, 162);
             this.ArgumentsText.Name = "ArgumentsText";
             this.ArgumentsText.Size = new System.Drawing.Size(237, 20);
             this.ArgumentsText.TabIndex = 6;
@@ -114,7 +114,7 @@
             // ArgumentsLabel
             // 
             this.ArgumentsLabel.AutoSize = true;
-            this.ArgumentsLabel.Location = new System.Drawing.Point(12, 390);
+            this.ArgumentsLabel.Location = new System.Drawing.Point(12, 165);
             this.ArgumentsLabel.Name = "ArgumentsLabel";
             this.ArgumentsLabel.Size = new System.Drawing.Size(60, 13);
             this.ArgumentsLabel.TabIndex = 7;
@@ -139,18 +139,18 @@
             // LookUpArgumentsLabel
             // 
             this.LookUpArgumentsLabel.AutoSize = true;
-            this.LookUpArgumentsLabel.Location = new System.Drawing.Point(424, 390);
+            this.LookUpArgumentsLabel.Location = new System.Drawing.Point(318, 196);
             this.LookUpArgumentsLabel.Name = "LookUpArgumentsLabel";
-            this.LookUpArgumentsLabel.Size = new System.Drawing.Size(48, 13);
+            this.LookUpArgumentsLabel.Size = new System.Drawing.Size(101, 13);
             this.LookUpArgumentsLabel.TabIndex = 10;
             this.LookUpArgumentsLabel.TabStop = true;
-            this.LookUpArgumentsLabel.Text = "Look Up";
+            this.LookUpArgumentsLabel.Text = "Look Up Arguments";
             this.LookUpArgumentsLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LookUpArgumentsLabel_LinkClicked);
             // 
             // OverwriteCheckbox
             // 
             this.OverwriteCheckbox.AutoSize = true;
-            this.OverwriteCheckbox.Location = new System.Drawing.Point(12, 439);
+            this.OverwriteCheckbox.Location = new System.Drawing.Point(12, 220);
             this.OverwriteCheckbox.Name = "OverwriteCheckbox";
             this.OverwriteCheckbox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.OverwriteCheckbox.Size = new System.Drawing.Size(223, 17);
@@ -177,7 +177,7 @@
             // DomainLabel
             // 
             this.DomainLabel.AutoSize = true;
-            this.DomainLabel.Location = new System.Drawing.Point(12, 364);
+            this.DomainLabel.Location = new System.Drawing.Point(12, 139);
             this.DomainLabel.Name = "DomainLabel";
             this.DomainLabel.Size = new System.Drawing.Size(46, 13);
             this.DomainLabel.TabIndex = 14;
@@ -185,14 +185,14 @@
             // 
             // DomainText
             // 
-            this.DomainText.Location = new System.Drawing.Point(182, 361);
+            this.DomainText.Location = new System.Drawing.Point(182, 136);
             this.DomainText.Name = "DomainText";
             this.DomainText.Size = new System.Drawing.Size(237, 20);
             this.DomainText.TabIndex = 15;
             // 
             // OlderThan
             // 
-            this.OlderThan.Location = new System.Drawing.Point(188, 413);
+            this.OlderThan.Location = new System.Drawing.Point(188, 194);
             this.OlderThan.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -205,7 +205,7 @@
             // OlderThanLabel
             // 
             this.OlderThanLabel.AutoSize = true;
-            this.OlderThanLabel.Location = new System.Drawing.Point(12, 415);
+            this.OlderThanLabel.Location = new System.Drawing.Point(12, 196);
             this.OlderThanLabel.Name = "OlderThanLabel";
             this.OlderThanLabel.Size = new System.Drawing.Size(170, 13);
             this.OlderThanLabel.TabIndex = 17;
@@ -214,7 +214,7 @@
             // DaysLabel
             // 
             this.DaysLabel.AutoSize = true;
-            this.DaysLabel.Location = new System.Drawing.Point(242, 415);
+            this.DaysLabel.Location = new System.Drawing.Point(242, 196);
             this.DaysLabel.Name = "DaysLabel";
             this.DaysLabel.Size = new System.Drawing.Size(32, 13);
             this.DaysLabel.TabIndex = 18;
@@ -238,7 +238,7 @@
             // 
             // SettingsGUI
             // 
-            this.ClientSize = new System.Drawing.Size(484, 561);
+            this.ClientSize = new System.Drawing.Size(484, 286);
             this.Controls.Add(this.RemoteUSMTLocationText);
             this.Controls.Add(this.RemoteUSMTLocationLabel);
             this.Controls.Add(this.DaysLabel);

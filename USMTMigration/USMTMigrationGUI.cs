@@ -16,25 +16,26 @@ namespace USMTMigration
 {
     public partial class USMTMigrationGUI : Form
     {
-        private Settings settings;
         private bool isBackup;
+        private String computerName;
 
         //Log out method... I don't know if this works.
-        [DllImport("user32")]
-        public static extern bool ExitWindowsEx(uint uFlags, uint dwReason);
+        //[DllImport("user32")]
+        //public static extern bool ExitWindowsEx(uint uFlags, uint dwReason);
 
         public USMTMigrationGUI()
         {
             InitializeComponent();
-            settings = new Settings();
             TransferButton.Enabled = ArgumentsButton.Enabled = false;
             USMTExists();
             OptionsExists();
+            Properties.Settings.Default.ComputerName = System.Environment.MachineName;
+            Properties.Settings.Default.Domain = Environment.UserDomainName;
         }
 
         private void Settings_Click(object sender, EventArgs e)
         {
-            SettingsGUI settingsGUI = new SettingsGUI(this.settings);
+            SettingsGUI settingsGUI = new SettingsGUI();
             settingsGUI.Show();
 
         }
@@ -99,36 +100,36 @@ namespace USMTMigration
             //string arguments = (isBackup) ? settings.GetBackupLocation() + ((settings.OverwriteArgument()) ? " /o" : "") : "";
             string arguments = "";
             if(isBackup){
-                arguments += settings.backupLocation;
+                arguments += Properties.Settings.Default.BackupLoc;
 
                 //God this is ugly
                 //arguments += (settings.OverwriteArgument()) ? " /o" : "";
                 //arguments += (settings.GetDate() > 0) ? " /uel:" + settings.GetDate() : ""; 
-
+                
                 //Or should I use this
-                if (settings.overwrite)
+                if (Properties.Settings.Default.Overwrite)
                 {
                     arguments += " /o";
                 }
-                if(settings.profilesOlderThan > 0)
+                if (Properties.Settings.Default.DaysToSave > 0)
                 {
-                    arguments += " /uel:" + settings.profilesOlderThan;
+                    arguments += " /uel:" + Properties.Settings.Default.DaysToSave;
                 }
 
                 foreach (string profile in ProfilesList.CheckedItems)
                 {
                     // /ui:farwest\user2
                     string temp = profile.Replace("C:\\Users\\", "");
-                    arguments += " /ui:" + settings.domain + "\\" + temp;
+                    arguments += " /ui:" + Properties.Settings.Default.Domain + "\\" + temp;
                 }
             }
             else
             {
-                arguments += settings.backupLocation + RestoreComputerText.Text;
+                arguments += Properties.Settings.Default.BackupLoc + RestoreComputerText.Text;
                 arguments += " /all";
             }
-            arguments += " " + settings.arguments;
-            arguments += " /l:" + settings.logLocation + settings.computerName + ((isBackup) ? "_scan.log" : "_load.log");
+            arguments += " " + Properties.Settings.Default.Arguments;
+            arguments += " /l:" + Properties.Settings.Default.LogLoc + Properties.Settings.Default.ComputerName + ((isBackup) ? "_scan.log" : "_load.log");
 
 
 
@@ -148,7 +149,7 @@ namespace USMTMigration
             Process migration = new Process();
             migration.StartInfo.UseShellExecute = true;
             migration.StartInfo.RedirectStandardOutput = false;
-            migration.StartInfo.FileName = settings.localUSMTLocation + ((isBackup) ? "\\scanstate.bat" : "\\loadstate.bat");
+            migration.StartInfo.FileName = Properties.Settings.Default.LocalUSMTLoc + ((isBackup) ? "\\scanstate.bat" : "\\loadstate.bat");
             migration.StartInfo.Arguments = GetArguments();
 
             migration.Start();
@@ -165,23 +166,23 @@ namespace USMTMigration
         //Show command to be executed when transfer is clicked
         private void ArgumentsButton_Click(object sender, EventArgs e)
         {
-            string text = settings.localUSMTLocation + ((isBackup) ? "\\scanstate.exe " : "\\loadstate.exe ") + GetArguments();
+            string text = Properties.Settings.Default.LocalUSMTLoc + ((isBackup) ? "\\scanstate.exe " : "\\loadstate.exe ") + GetArguments();
             MessageBox.Show(text);
         }
 
         //Check to see if USMT files are present on the local machine in the designated folder, otherwise copy them
         private void USMTExists()
         {
-            if (!Directory.Exists(settings.localUSMTLocation))
+            if (!Directory.Exists(Properties.Settings.Default.LocalUSMTLoc))
             {
-                string[] files = System.IO.Directory.GetFiles(settings.remoteUSMTLocation);
+                string[] files = System.IO.Directory.GetFiles(Properties.Settings.Default.RemoteUSMTLoc);
 
                 // Copy the files and overwrite destination files if they already exist. 
                 foreach (string s in files)
                 {
                       //Use static Path methods to extract only the file name from the path.
                       String fileName = System.IO.Path.GetFileName(s);
-                      String destFile = System.IO.Path.Combine(settings.localUSMTLocation, fileName);
+                      String destFile = System.IO.Path.Combine(Properties.Settings.Default.LocalUSMTLoc, fileName);
                       System.IO.File.Copy(s, destFile, true);
                 }
                 
@@ -192,8 +193,8 @@ namespace USMTMigration
         //Check for options.txt and if it exists, initializes variables
         private void OptionsExists()
         {
-            Console.WriteLine(settings.localUSMTLocation + "options.txt");
-            if (File.Exists(settings.localUSMTLocation + "options.txt"))
+            Console.WriteLine(Properties.Settings.Default.LocalUSMTLoc + "options.txt");
+            if (File.Exists(Properties.Settings.Default.LocalUSMTLoc + "options.txt"))
             {
                 Console.WriteLine("Found it");
             }
