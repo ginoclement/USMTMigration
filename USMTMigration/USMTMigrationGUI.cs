@@ -17,7 +17,6 @@ namespace USMTMigration
     public partial class USMTMigrationGUI : Form
     {
         private bool isBackup;
-        private String computerName;
 
         //Log out method... I don't know if this works.
         //[DllImport("user32")]
@@ -28,7 +27,6 @@ namespace USMTMigration
             InitializeComponent();
             TransferButton.Enabled = ArgumentsButton.Enabled = false;
             USMTExists();
-            OptionsExists();
             Properties.Settings.Default.ComputerName = System.Environment.MachineName;
             Properties.Settings.Default.Domain = Environment.UserDomainName;
         }
@@ -97,6 +95,7 @@ namespace USMTMigration
 
         private string GetArguments()
         {
+            //Lolz gotta love ternary operators
             //string arguments = (isBackup) ? settings.GetBackupLocation() + ((settings.OverwriteArgument()) ? " /o" : "") : "";
             string arguments = "";
             if(isBackup){
@@ -162,7 +161,6 @@ namespace USMTMigration
             //ExitWindowsEx(0, 0);
 
         }
-
         //Show command to be executed when transfer is clicked
         private void ArgumentsButton_Click(object sender, EventArgs e)
         {
@@ -175,8 +173,8 @@ namespace USMTMigration
         {
             if (!Directory.Exists(Properties.Settings.Default.LocalUSMTLoc))
             {
+                Console.WriteLine("USMT files not found, copying...");
                 string[] files = System.IO.Directory.GetFiles(Properties.Settings.Default.RemoteUSMTLoc);
-
                 // Copy the files and overwrite destination files if they already exist. 
                 foreach (string s in files)
                 {
@@ -185,18 +183,11 @@ namespace USMTMigration
                       String destFile = System.IO.Path.Combine(Properties.Settings.Default.LocalUSMTLoc, fileName);
                       System.IO.File.Copy(s, destFile, true);
                 }
-                
-            }
-            OptionsExists();
-        }
 
-        //Check for options.txt and if it exists, initializes variables
-        private void OptionsExists()
-        {
-            Console.WriteLine(Properties.Settings.Default.LocalUSMTLoc + "options.txt");
-            if (File.Exists(Properties.Settings.Default.LocalUSMTLoc + "options.txt"))
+            }
+            else
             {
-                Console.WriteLine("Found it");
+                Console.WriteLine("USMT files already exist.");
             }
         }
 
