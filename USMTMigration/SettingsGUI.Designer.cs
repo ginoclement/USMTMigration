@@ -49,6 +49,9 @@
             this.DaysLabel = new System.Windows.Forms.Label();
             this.RemoteUSMTLocationLabel = new System.Windows.Forms.Label();
             this.RemoteUSMTLocationText = new System.Windows.Forms.TextBox();
+            this.MigApp = new System.Windows.Forms.CheckBox();
+            this.MigUser = new System.Windows.Forms.CheckBox();
+            this.MigDocs = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.OlderThan)).BeginInit();
             this.SuspendLayout();
             // 
@@ -86,7 +89,7 @@
             // 
             // SaveButton
             // 
-            this.SaveButton.Location = new System.Drawing.Point(316, 476);
+            this.SaveButton.Location = new System.Drawing.Point(263, 326);
             this.SaveButton.Name = "SaveButton";
             this.SaveButton.Size = new System.Drawing.Size(75, 23);
             this.SaveButton.TabIndex = 4;
@@ -96,7 +99,7 @@
             // 
             // CloseButton
             // 
-            this.CloseButton.Location = new System.Drawing.Point(397, 476);
+            this.CloseButton.Location = new System.Drawing.Point(344, 326);
             this.CloseButton.Name = "CloseButton";
             this.CloseButton.Size = new System.Drawing.Size(75, 23);
             this.CloseButton.TabIndex = 5;
@@ -106,7 +109,7 @@
             // 
             // ArgumentsText
             // 
-            this.ArgumentsText.Location = new System.Drawing.Point(182, 387);
+            this.ArgumentsText.Location = new System.Drawing.Point(182, 162);
             this.ArgumentsText.Name = "ArgumentsText";
             this.ArgumentsText.Size = new System.Drawing.Size(237, 20);
             this.ArgumentsText.TabIndex = 6;
@@ -114,7 +117,7 @@
             // ArgumentsLabel
             // 
             this.ArgumentsLabel.AutoSize = true;
-            this.ArgumentsLabel.Location = new System.Drawing.Point(12, 390);
+            this.ArgumentsLabel.Location = new System.Drawing.Point(12, 165);
             this.ArgumentsLabel.Name = "ArgumentsLabel";
             this.ArgumentsLabel.Size = new System.Drawing.Size(60, 13);
             this.ArgumentsLabel.TabIndex = 7;
@@ -139,20 +142,20 @@
             // LookUpArgumentsLabel
             // 
             this.LookUpArgumentsLabel.AutoSize = true;
-            this.LookUpArgumentsLabel.Location = new System.Drawing.Point(424, 390);
+            this.LookUpArgumentsLabel.Location = new System.Drawing.Point(318, 196);
             this.LookUpArgumentsLabel.Name = "LookUpArgumentsLabel";
-            this.LookUpArgumentsLabel.Size = new System.Drawing.Size(48, 13);
+            this.LookUpArgumentsLabel.Size = new System.Drawing.Size(101, 13);
             this.LookUpArgumentsLabel.TabIndex = 10;
             this.LookUpArgumentsLabel.TabStop = true;
-            this.LookUpArgumentsLabel.Text = "Look Up";
+            this.LookUpArgumentsLabel.Text = "Look Up Arguments";
             this.LookUpArgumentsLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LookUpArgumentsLabel_LinkClicked);
             // 
             // OverwriteCheckbox
             // 
             this.OverwriteCheckbox.AutoSize = true;
-            this.OverwriteCheckbox.Location = new System.Drawing.Point(12, 439);
+            this.OverwriteCheckbox.Location = new System.Drawing.Point(15, 220);
             this.OverwriteCheckbox.Name = "OverwriteCheckbox";
-            this.OverwriteCheckbox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.OverwriteCheckbox.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.OverwriteCheckbox.Size = new System.Drawing.Size(223, 17);
             this.OverwriteCheckbox.TabIndex = 11;
             this.OverwriteCheckbox.Text = "Overwrite existing backups. (/o argument)";
@@ -177,7 +180,7 @@
             // DomainLabel
             // 
             this.DomainLabel.AutoSize = true;
-            this.DomainLabel.Location = new System.Drawing.Point(12, 364);
+            this.DomainLabel.Location = new System.Drawing.Point(12, 139);
             this.DomainLabel.Name = "DomainLabel";
             this.DomainLabel.Size = new System.Drawing.Size(46, 13);
             this.DomainLabel.TabIndex = 14;
@@ -185,14 +188,14 @@
             // 
             // DomainText
             // 
-            this.DomainText.Location = new System.Drawing.Point(182, 361);
+            this.DomainText.Location = new System.Drawing.Point(182, 136);
             this.DomainText.Name = "DomainText";
             this.DomainText.Size = new System.Drawing.Size(237, 20);
             this.DomainText.TabIndex = 15;
             // 
             // OlderThan
             // 
-            this.OlderThan.Location = new System.Drawing.Point(188, 413);
+            this.OlderThan.Location = new System.Drawing.Point(188, 194);
             this.OlderThan.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -205,7 +208,7 @@
             // OlderThanLabel
             // 
             this.OlderThanLabel.AutoSize = true;
-            this.OlderThanLabel.Location = new System.Drawing.Point(12, 415);
+            this.OlderThanLabel.Location = new System.Drawing.Point(12, 196);
             this.OlderThanLabel.Name = "OlderThanLabel";
             this.OlderThanLabel.Size = new System.Drawing.Size(170, 13);
             this.OlderThanLabel.TabIndex = 17;
@@ -214,7 +217,7 @@
             // DaysLabel
             // 
             this.DaysLabel.AutoSize = true;
-            this.DaysLabel.Location = new System.Drawing.Point(242, 415);
+            this.DaysLabel.Location = new System.Drawing.Point(242, 196);
             this.DaysLabel.Name = "DaysLabel";
             this.DaysLabel.Size = new System.Drawing.Size(32, 13);
             this.DaysLabel.TabIndex = 18;
@@ -236,9 +239,42 @@
             this.RemoteUSMTLocationText.Size = new System.Drawing.Size(237, 20);
             this.RemoteUSMTLocationText.TabIndex = 20;
             // 
+            // MigApp
+            // 
+            this.MigApp.AutoSize = true;
+            this.MigApp.Location = new System.Drawing.Point(15, 243);
+            this.MigApp.Name = "MigApp";
+            this.MigApp.Size = new System.Drawing.Size(80, 17);
+            this.MigApp.TabIndex = 21;
+            this.MigApp.Text = "MigApp.xml";
+            this.MigApp.UseVisualStyleBackColor = true;
+            // 
+            // MigUser
+            // 
+            this.MigUser.AutoSize = true;
+            this.MigUser.Location = new System.Drawing.Point(15, 266);
+            this.MigUser.Name = "MigUser";
+            this.MigUser.Size = new System.Drawing.Size(83, 17);
+            this.MigUser.TabIndex = 22;
+            this.MigUser.Text = "MigUser.xml";
+            this.MigUser.UseVisualStyleBackColor = true;
+            // 
+            // MigDocs
+            // 
+            this.MigDocs.AutoSize = true;
+            this.MigDocs.Location = new System.Drawing.Point(15, 289);
+            this.MigDocs.Name = "MigDocs";
+            this.MigDocs.Size = new System.Drawing.Size(86, 17);
+            this.MigDocs.TabIndex = 23;
+            this.MigDocs.Text = "MigDocs.xml";
+            this.MigDocs.UseVisualStyleBackColor = true;
+            // 
             // SettingsGUI
             // 
-            this.ClientSize = new System.Drawing.Size(484, 561);
+            this.ClientSize = new System.Drawing.Size(484, 361);
+            this.Controls.Add(this.MigDocs);
+            this.Controls.Add(this.MigUser);
+            this.Controls.Add(this.MigApp);
             this.Controls.Add(this.RemoteUSMTLocationText);
             this.Controls.Add(this.RemoteUSMTLocationLabel);
             this.Controls.Add(this.DaysLabel);
@@ -293,6 +329,9 @@
         private System.Windows.Forms.Label DaysLabel;
         private System.Windows.Forms.Label RemoteUSMTLocationLabel;
         private System.Windows.Forms.TextBox RemoteUSMTLocationText;
+        private System.Windows.Forms.CheckBox MigApp;
+        private System.Windows.Forms.CheckBox MigUser;
+        private System.Windows.Forms.CheckBox MigDocs;
 
     }
 }

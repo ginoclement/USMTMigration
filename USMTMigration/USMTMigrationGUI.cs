@@ -16,25 +16,23 @@ namespace USMTMigration
 {
     public partial class USMTMigrationGUI : Form
     {
-        private Settings settings;
         private bool isBackup;
 
         //Log out method... I don't know if this works.
-        [DllImport("user32")]
-        public static extern bool ExitWindowsEx(uint uFlags, uint dwReason);
+        //[DllImport("user32")]
+        //public static extern bool ExitWindowsEx(uint uFlags, uint dwReason);
 
         public USMTMigrationGUI()
         {
             InitializeComponent();
-            settings = new Settings();
             TransferButton.Enabled = ArgumentsButton.Enabled = false;
-            USMTExists();
-            OptionsExists();
+            Properties.Settings.Default.ComputerName = System.Environment.MachineName;
+            Properties.Settings.Default.Domain = Environment.UserDomainName;
         }
 
         private void Settings_Click(object sender, EventArgs e)
         {
-            SettingsGUI settingsGUI = new SettingsGUI(this.settings);
+            SettingsGUI settingsGUI = new SettingsGUI();
             settingsGUI.Show();
 
         }
@@ -96,39 +94,55 @@ namespace USMTMigration
 
         private string GetArguments()
         {
+            //Lolz gotta love ternary operators
             //string arguments = (isBackup) ? settings.GetBackupLocation() + ((settings.OverwriteArgument()) ? " /o" : "") : "";
             string arguments = "";
+            string source = Properties.Settings.Default.LocalUSMTLoc;
+
             if(isBackup){
-                arguments += settings.backupLocation;
+                arguments += Properties.Settings.Default.BackupLoc + "\\";
 
                 //God this is ugly
                 //arguments += (settings.OverwriteArgument()) ? " /o" : "";
                 //arguments += (settings.GetDate() > 0) ? " /uel:" + settings.GetDate() : ""; 
-
-                //Or should I use this
-                if (settings.overwrite)
+                
+                //Overwrite parameter
+                if (Properties.Settings.Default.Overwrite)
                 {
                     arguments += " /o";
                 }
-                if(settings.profilesOlderThan > 0)
+
+                //Days to save parameter
+                if (Properties.Settings.Default.DaysToSave > 0)
                 {
-                    arguments += " /uel:" + settings.profilesOlderThan;
+                    arguments += " /uel:" + Properties.Settings.Default.DaysToSave;
+                }
+
+                //MigApp, MigUser, and MigDocs parameters
+                if(Properties.Settings.Default.MigApp){
+                    arguments += " /i:MigApp.xml ";
+                }
+                if(Properties.Settings.Default.MigUser){
+                    arguments += " /i:MigUser.xml ";
+                }
+                if(Properties.Settings.Default.MigDocs){
+                    arguments += " /i:MigDocs.xml ";
                 }
 
                 foreach (string profile in ProfilesList.CheckedItems)
                 {
                     // /ui:farwest\user2
                     string temp = profile.Replace("C:\\Users\\", "");
-                    arguments += " /ui:" + settings.domain + "\\" + temp;
+                    arguments += " /ui:" + Properties.Settings.Default.Domain + "\\" + temp;
                 }
             }
             else
             {
-                arguments += settings.backupLocation + RestoreComputerText.Text;
+                arguments += Properties.Settings.Default.BackupLoc + RestoreComputerText.Text;
                 arguments += " /all";
             }
-            arguments += " " + settings.arguments;
-            arguments += " /l:" + settings.logLocation + settings.computerName + ((isBackup) ? "_scan.log" : "_load.log");
+            arguments += " " + Properties.Settings.Default.Arguments;
+            arguments += " /l:\"" + Properties.Settings.Default.LogLoc + "\\" + Properties.Settings.Default.ComputerName + ((isBackup) ? "_scan.log" : "_load.log") + "\"";
 
 
 
@@ -145,63 +159,84 @@ namespace USMTMigration
 
         private void Transfer()
         {
+            //Check for USMT tools
+            USMTExists();
+
+
+            string command = ((isBackup) ? "scanstate.exe" : "loadstate.exe") + " " + GetArguments();
+            Console.WriteLine("Command: " + command);
+            //System.Diagnostics.Process.Start("CMD.exe", command);
+            //this.Close();
+
             Process migration = new Process();
-            migration.StartInfo.UseShellExecute = true;
-            migration.StartInfo.RedirectStandardOutput = false;
-            migration.StartInfo.FileName = settings.localUSMTLocation + ((isBackup) ? "\\scanstate.bat" : "\\loadstate.bat");
-            migration.StartInfo.Arguments = GetArguments();
-
+            ProcessStartInfo startInfo = new ProcessStartInfo();
+            startInfo.FileName = "cmd.exe";
+            startInfo.Arguments = "/C cd " + Properties.Settings.Default.LocalUSMTLoc + " & " + command + " & pause";
+            //startInfo.Arguments = "/C cd " + Properties.Settings.Default.LocalUSMTLoc + " & dir & pause & " + command + " & pause";
+            migration.StartInfo = startInfo;
             migration.Start();
-            //string output = migration.StandardOutput.ReadLine();
-            //Close the program
-            migration.WaitForExit();
-            this.Close();
-
             //This is supposed to execute Windows Logout
             //ExitWindowsEx(0, 0);
 
         }
-
         //Show command to be executed when transfer is clicked
         private void ArgumentsButton_Click(object sender, EventArgs e)
         {
-            string text = settings.localUSMTLocation + ((isBackup) ? "\\scanstate.exe " : "\\loadstate.exe ") + GetArguments();
+            string text = ((isBackup) ? "scanstate.exe" : "loadstate.exe") + " " + GetArguments();
             MessageBox.Show(text);
         }
 
-        //Check to see if USMT files are present on the local machine in the designated folder, otherwise copy them
+        //Check to see if USMT files are present on the local machine in the designated folder,
+        //otherwise copy them. Throws DirectoryNotFoundException if files are not found locally
+        //and not found at the remote location.
         private void USMTExists()
         {
-            if (!Directory.Exists(settings.localUSMTLocation))
-            {
-                string[] files = System.IO.Directory.GetFiles(settings.remoteUSMTLocation);
+            DirectoryInfo source = new DirectoryInfo(Properties.Settings.Default.LocalUSMTLoc);
+            DirectoryInfo target = new DirectoryInfo(Properties.Settings.Default.RemoteUSMTLoc);
 
-                // Copy the files and overwrite destination files if they already exist. 
-                foreach (string s in files)
-                {
-                      //Use static Path methods to extract only the file name from the path.
-                      String fileName = System.IO.Path.GetFileName(s);
-                      String destFile = System.IO.Path.Combine(settings.localUSMTLocation, fileName);
-                      System.IO.File.Copy(s, destFile, true);
-                }
+            //Check to see if the target directory exists
+            Console.WriteLine("Checking for USMT tools...");
+            if (!source.Exists)
+            {
+                //Create directory
+                Console.WriteLine("Local USMT directory does not exist, creating...");
+                Directory.CreateDirectory(Properties.Settings.Default.LocalUSMTLoc);
                 
-            }
-            OptionsExists();
-        }
+                //If the source directory doesn't exist, throw an exception
+                if (!Directory.Exists(Properties.Settings.Default.RemoteUSMTLoc))
+                {
+                    throw new DirectoryNotFoundException("Source directory does not exist: " + Properties.Settings.Default.RemoteUSMTLoc);
+                }
 
-        //Check for options.txt and if it exists, initializes variables
-        private void OptionsExists()
-        {
-            Console.WriteLine(settings.localUSMTLocation + "options.txt");
-            if (File.Exists(settings.localUSMTLocation + "options.txt"))
+                //Copy USMT files
+                Console.WriteLine("Copying USMT files...");
+                CopyDirectory(Properties.Settings.Default.RemoteUSMTLoc, Properties.Settings.Default.LocalUSMTLoc);
+            }
+            else
             {
-                Console.WriteLine("Found it");
+                Console.WriteLine("USMT files are present on this computer.");
             }
         }
 
+        //Copy the files in the directory as well as any subdirectories
+        private void CopyDirectory(String sourcepath, String targetpath)
+        {
+            DirectoryInfo source = new DirectoryInfo(sourcepath);
 
-
-
-
+            //Copy all files at the source + path
+            foreach(FileInfo file in source.GetFiles()){
+                Console.WriteLine(file.FullName);
+                
+                file.CopyTo(targetpath + "\\" + file.Name);
+            }
+            //Get all directories at the source + path
+            foreach(DirectoryInfo dir in source.GetDirectories())
+            {
+                //Create the directory at the destination + path
+                Directory.CreateDirectory(targetpath + "\\" + dir.Name);
+                //Recurse with destination + path as the new path
+                CopyDirectory(dir.FullName, targetpath + "\\" + dir.Name);
+            }
+        }
     }
 }
