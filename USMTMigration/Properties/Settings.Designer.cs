@@ -49,7 +49,7 @@ namespace USMTMigration.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("/i:migapp.xml /i:miguser.xml /v:13 /c")]
+        [global::System.Configuration.DefaultSettingValueAttribute("/v:13 /c")]
         public string Arguments {
             get {
                 return ((string)(this["Arguments"]));
@@ -85,7 +85,7 @@ namespace USMTMigration.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Users\\iguest\\Desktop\\Local USMT")]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\USMT")]
         public string LocalUSMTLoc {
             get {
                 return ((string)(this["LocalUSMTLoc"]));
@@ -128,6 +128,42 @@ namespace USMTMigration.Properties {
             }
             set {
                 this["DaysToSave"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool MigApp {
+            get {
+                return ((bool)(this["MigApp"]));
+            }
+            set {
+                this["MigApp"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool MigUser {
+            get {
+                return ((bool)(this["MigUser"]));
+            }
+            set {
+                this["MigUser"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool MigDocs {
+            get {
+                return ((bool)(this["MigDocs"]));
+            }
+            set {
+                this["MigDocs"] = value;
             }
         }
     }

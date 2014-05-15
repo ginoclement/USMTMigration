@@ -25,6 +25,9 @@ namespace USMTMigration
             RemoteUSMTLocationText.Text = Properties.Settings.Default.RemoteUSMTLoc;
             DomainText.Text = Properties.Settings.Default.Domain;
             OlderThan.Value = Properties.Settings.Default.DaysToSave;
+            MigApp.Checked = Properties.Settings.Default.MigApp;
+            MigUser.Checked = Properties.Settings.Default.MigUser;
+            MigDocs.Checked = Properties.Settings.Default.MigDocs;
 
         }
 
@@ -44,6 +47,9 @@ namespace USMTMigration
             Properties.Settings.Default.RemoteUSMTLoc = RemoteUSMTLocationText.Text;
             Properties.Settings.Default.Domain = DomainText.Text;
             Properties.Settings.Default.DaysToSave = (uint)OlderThan.Value;
+            Properties.Settings.Default.MigApp = MigApp.Checked;
+            Properties.Settings.Default.MigUser = MigUser.Checked;
+            Properties.Settings.Default.MigDocs = MigDocs.Checked;
 
             this.Close();
         }

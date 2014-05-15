@@ -49,6 +49,9 @@
             this.DaysLabel = new System.Windows.Forms.Label();
             this.RemoteUSMTLocationLabel = new System.Windows.Forms.Label();
             this.RemoteUSMTLocationText = new System.Windows.Forms.TextBox();
+            this.MigApp = new System.Windows.Forms.CheckBox();
+            this.MigUser = new System.Windows.Forms.CheckBox();
+            this.MigDocs = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.OlderThan)).BeginInit();
             this.SuspendLayout();
             // 
@@ -86,7 +89,7 @@
             // 
             // SaveButton
             // 
-            this.SaveButton.Location = new System.Drawing.Point(263, 251);
+            this.SaveButton.Location = new System.Drawing.Point(263, 326);
             this.SaveButton.Name = "SaveButton";
             this.SaveButton.Size = new System.Drawing.Size(75, 23);
             this.SaveButton.TabIndex = 4;
@@ -96,7 +99,7 @@
             // 
             // CloseButton
             // 
-            this.CloseButton.Location = new System.Drawing.Point(344, 251);
+            this.CloseButton.Location = new System.Drawing.Point(344, 326);
             this.CloseButton.Name = "CloseButton";
             this.CloseButton.Size = new System.Drawing.Size(75, 23);
             this.CloseButton.TabIndex = 5;
@@ -150,9 +153,9 @@
             // OverwriteCheckbox
             // 
             this.OverwriteCheckbox.AutoSize = true;
-            this.OverwriteCheckbox.Location = new System.Drawing.Point(12, 220);
+            this.OverwriteCheckbox.Location = new System.Drawing.Point(15, 220);
             this.OverwriteCheckbox.Name = "OverwriteCheckbox";
-            this.OverwriteCheckbox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.OverwriteCheckbox.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.OverwriteCheckbox.Size = new System.Drawing.Size(223, 17);
             this.OverwriteCheckbox.TabIndex = 11;
             this.OverwriteCheckbox.Text = "Overwrite existing backups. (/o argument)";
@@ -236,9 +239,42 @@
             this.RemoteUSMTLocationText.Size = new System.Drawing.Size(237, 20);
             this.RemoteUSMTLocationText.TabIndex = 20;
             // 
+            // MigApp
+            // 
+            this.MigApp.AutoSize = true;
+            this.MigApp.Location = new System.Drawing.Point(15, 243);
+            this.MigApp.Name = "MigApp";
+            this.MigApp.Size = new System.Drawing.Size(80, 17);
+            this.MigApp.TabIndex = 21;
+            this.MigApp.Text = "MigApp.xml";
+            this.MigApp.UseVisualStyleBackColor = true;
+            // 
+            // MigUser
+            // 
+            this.MigUser.AutoSize = true;
+            this.MigUser.Location = new System.Drawing.Point(15, 266);
+            this.MigUser.Name = "MigUser";
+            this.MigUser.Size = new System.Drawing.Size(83, 17);
+            this.MigUser.TabIndex = 22;
+            this.MigUser.Text = "MigUser.xml";
+            this.MigUser.UseVisualStyleBackColor = true;
+            // 
+            // MigDocs
+            // 
+            this.MigDocs.AutoSize = true;
+            this.MigDocs.Location = new System.Drawing.Point(15, 289);
+            this.MigDocs.Name = "MigDocs";
+            this.MigDocs.Size = new System.Drawing.Size(86, 17);
+            this.MigDocs.TabIndex = 23;
+            this.MigDocs.Text = "MigDocs.xml";
+            this.MigDocs.UseVisualStyleBackColor = true;
+            // 
             // SettingsGUI
             // 
-            this.ClientSize = new System.Drawing.Size(484, 286);
+            this.ClientSize = new System.Drawing.Size(484, 361);
+            this.Controls.Add(this.MigDocs);
+            this.Controls.Add(this.MigUser);
+            this.Controls.Add(this.MigApp);
             this.Controls.Add(this.RemoteUSMTLocationText);
             this.Controls.Add(this.RemoteUSMTLocationLabel);
             this.Controls.Add(this.DaysLabel);
@@ -293,6 +329,9 @@
         private System.Windows.Forms.Label DaysLabel;
         private System.Windows.Forms.Label RemoteUSMTLocationLabel;
         private System.Windows.Forms.TextBox RemoteUSMTLocationText;
+        private System.Windows.Forms.CheckBox MigApp;
+        private System.Windows.Forms.CheckBox MigUser;
+        private System.Windows.Forms.CheckBox MigDocs;
 
     }
 }

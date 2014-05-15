@@ -97,6 +97,8 @@ namespace USMTMigration
             //Lolz gotta love ternary operators
             //string arguments = (isBackup) ? settings.GetBackupLocation() + ((settings.OverwriteArgument()) ? " /o" : "") : "";
             string arguments = "";
+            string source = Properties.Settings.Default.LocalUSMTLoc;
+
             if(isBackup){
                 arguments += Properties.Settings.Default.BackupLoc + "\\";
 
@@ -104,14 +106,27 @@ namespace USMTMigration
                 //arguments += (settings.OverwriteArgument()) ? " /o" : "";
                 //arguments += (settings.GetDate() > 0) ? " /uel:" + settings.GetDate() : ""; 
                 
-                //Or should I use this
+                //Overwrite parameter
                 if (Properties.Settings.Default.Overwrite)
                 {
                     arguments += " /o";
                 }
+
+                //Days to save parameter
                 if (Properties.Settings.Default.DaysToSave > 0)
                 {
                     arguments += " /uel:" + Properties.Settings.Default.DaysToSave;
+                }
+
+                //MigApp, MigUser, and MigDocs parameters
+                if(Properties.Settings.Default.MigApp){
+                    arguments += " /i:MigApp.xml ";
+                }
+                if(Properties.Settings.Default.MigUser){
+                    arguments += " /i:MigUser.xml ";
+                }
+                if(Properties.Settings.Default.MigDocs){
+                    arguments += " /i:MigDocs.xml ";
                 }
 
                 foreach (string profile in ProfilesList.CheckedItems)
@@ -148,7 +163,7 @@ namespace USMTMigration
             USMTExists();
 
 
-            string command = "\"" + Properties.Settings.Default.LocalUSMTLoc + "\\USMT\\amd64" + ((isBackup) ? "\\scanstate.exe" : "\\loadstate.exe") + "\" " + GetArguments();
+            string command = ((isBackup) ? "scanstate.exe" : "loadstate.exe") + " " + GetArguments();
             Console.WriteLine("Command: " + command);
             //System.Diagnostics.Process.Start("CMD.exe", command);
             //this.Close();
@@ -156,7 +171,8 @@ namespace USMTMigration
             Process migration = new Process();
             ProcessStartInfo startInfo = new ProcessStartInfo();
             startInfo.FileName = "cmd.exe";
-            startInfo.Arguments = "/C " + command + " & pause";
+            startInfo.Arguments = "/C cd " + Properties.Settings.Default.LocalUSMTLoc + " & " + command + " & pause";
+            //startInfo.Arguments = "/C cd " + Properties.Settings.Default.LocalUSMTLoc + " & dir & pause & " + command + " & pause";
             migration.StartInfo = startInfo;
             migration.Start();
             //This is supposed to execute Windows Logout
@@ -166,7 +182,7 @@ namespace USMTMigration
         //Show command to be executed when transfer is clicked
         private void ArgumentsButton_Click(object sender, EventArgs e)
         {
-            string text = Properties.Settings.Default.LocalUSMTLoc + ((isBackup) ? "\\scanstate.exe " : "\\loadstate.exe ") + GetArguments();
+            string text = ((isBackup) ? "scanstate.exe" : "loadstate.exe") + " " + GetArguments();
             MessageBox.Show(text);
         }
 
