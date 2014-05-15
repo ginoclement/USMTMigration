@@ -16,7 +16,6 @@ namespace USMTMigration
         public SettingsGUI()
         {
             InitializeComponent();
-
             BackupLocationText.Text = Properties.Settings.Default.BackupLoc;
             LogLocationText.Text = Properties.Settings.Default.LogLoc;
             ArgumentsText.Text = Properties.Settings.Default.Arguments;

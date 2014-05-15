@@ -168,27 +168,57 @@ namespace USMTMigration
             MessageBox.Show(text);
         }
 
-        //Check to see if USMT files are present on the local machine in the designated folder, otherwise copy them
+        //Check to see if USMT files are present on the local machine in the designated folder,
+        //otherwise copy them. Throws DirectoryNotFoundException if files are not found locally
+        //and not found at the remote location.
         private void USMTExists()
         {
-            if (!Directory.Exists(Properties.Settings.Default.LocalUSMTLoc))
+            DirectoryInfo source = new DirectoryInfo(Properties.Settings.Default.LocalUSMTLoc);
+            DirectoryInfo target = new DirectoryInfo(Properties.Settings.Default.RemoteUSMTLoc);
+
+            //Check to see if the target directory exists
+            if (!source.Exists())
             {
-                Console.WriteLine("USMT files not found, copying...");
-                string[] files = System.IO.Directory.GetFiles(Properties.Settings.Default.RemoteUSMTLoc);
-                // Copy the files and overwrite destination files if they already exist. 
-                foreach (string s in files)
+                //Create directory
+                Console.WriteLine("Local USMT directory does not exist, creating...");
+                Directory.CreateDirectory(Properties.Settings.Default.LocalUSMTLoc);
+                
+                //Check to verify source directory exists
+                if (!Directory.Exists(Properties.Settings.Default.RemoteUSMTLoc))
                 {
-                      //Use static Path methods to extract only the file name from the path.
-                      String fileName = System.IO.Path.GetFileName(s);
-                      String destFile = System.IO.Path.Combine(Properties.Settings.Default.LocalUSMTLoc, fileName);
-                      System.IO.File.Copy(s, destFile, true);
+                    throw new DirectoryNotFoundException("Source directory does not exist: " + Properties.Settings.Default.RemoteUSMTLoc);
                 }
+
+                //Copy USMT files
+                Console.WriteLine("Copying USMT files...");
+
+                FileInfo[] files = 
 
             }
             else
             {
-                Console.WriteLine("USMT files already exist.");
+                Console.WriteLine("USMT files are present on this computer.");
             }
+
+            ////Check to see
+            //if (!Directory.Exists(Properties.Settings.Default.LocalUSMTLoc))
+            //{
+            //    Console.WriteLine("USMT files not found, copying...");
+            //    string[] files = System.IO.Directory.GetFiles(Properties.Settings.Default.RemoteUSMTLoc);
+            //    // Copy the files and overwrite destination files if they already exist. 
+            //    foreach (string s in files)
+            //    {
+            //          //Use static Path methods to extract only the file name from the path.
+            //          String fileName = System.IO.Path.GetFileName(s);
+            //          String destFile = System.IO.Path.Combine(Properties.Settings.Default.LocalUSMTLoc, fileName);
+            //          System.IO.File.Copy(s, destFile, true);
+            //    }
+
+            //}
+            //else
+            //{
+            //    Console.WriteLine("USMT files already exist.");
+            //}
         }
 
 
