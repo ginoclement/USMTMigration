@@ -3,10 +3,10 @@
   <Profiles />
   <Settings>
     <Setting Name="BackupLoc" Type="System.String" Scope="User">
-      <Value Profile="(Default)">C:\Users\iguest\Desktop\Backup</Value>
+      <Value Profile="(Default)">C:\Users\Gino Clement\Desktop\USMT\Backups</Value>
     </Setting>
     <Setting Name="LogLoc" Type="System.String" Scope="User">
-      <Value Profile="(Default)">C:\Users\iguest\Desktop\Logs</Value>
+      <Value Profile="(Default)">C:\Users\Gino Clement\Desktop\USMT\Logs</Value>
     </Setting>
     <Setting Name="Arguments" Type="System.String" Scope="User">
       <Value Profile="(Default)">/v:13 /c</Value>
@@ -18,10 +18,10 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="LocalUSMTLoc" Type="System.String" Scope="User">
-      <Value Profile="(Default)">C:\USMT</Value>
+      <Value Profile="(Default)">C:\Users\Gino Clement\Desktop\USMT\Local Tools</Value>
     </Setting>
     <Setting Name="RemoteUSMTLoc" Type="System.String" Scope="User">
-      <Value Profile="(Default)">C:\Users\iguest\Desktop\Remote USMT</Value>
+      <Value Profile="(Default)">C:\Users\Gino Clement\Desktop\USMT\Remote Tools</Value>
     </Setting>
     <Setting Name="Domain" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
