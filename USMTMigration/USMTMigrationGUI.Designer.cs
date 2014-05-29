@@ -36,8 +36,6 @@
             this.UnselectAllButton = new System.Windows.Forms.Button();
             this.TransferButton = new System.Windows.Forms.Button();
             this.ArgumentsButton = new System.Windows.Forms.Button();
-            this.RestoreComputerLabel = new System.Windows.Forms.Label();
-            this.RestoreComputerText = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // BackupButton
@@ -62,6 +60,7 @@
             // 
             // ProfilesList
             // 
+            this.ProfilesList.CheckOnClick = true;
             this.ProfilesList.FormattingEnabled = true;
             this.ProfilesList.Location = new System.Drawing.Point(94, 13);
             this.ProfilesList.Name = "ProfilesList";
@@ -119,31 +118,11 @@
             this.ArgumentsButton.UseVisualStyleBackColor = true;
             this.ArgumentsButton.Click += new System.EventHandler(this.ArgumentsButton_Click);
             // 
-            // RestoreComputerLabel
-            // 
-            this.RestoreComputerLabel.AutoSize = true;
-            this.RestoreComputerLabel.Location = new System.Drawing.Point(95, 43);
-            this.RestoreComputerLabel.Name = "RestoreComputerLabel";
-            this.RestoreComputerLabel.Size = new System.Drawing.Size(131, 13);
-            this.RestoreComputerLabel.TabIndex = 10;
-            this.RestoreComputerLabel.Text = "Computer name to restore:";
-            this.RestoreComputerLabel.Visible = false;
-            // 
-            // RestoreComputerText
-            // 
-            this.RestoreComputerText.Location = new System.Drawing.Point(95, 60);
-            this.RestoreComputerText.Name = "RestoreComputerText";
-            this.RestoreComputerText.Size = new System.Drawing.Size(296, 20);
-            this.RestoreComputerText.TabIndex = 11;
-            this.RestoreComputerText.Visible = false;
-            // 
             // USMTMigrationGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(484, 261);
-            this.Controls.Add(this.RestoreComputerText);
-            this.Controls.Add(this.RestoreComputerLabel);
             this.Controls.Add(this.ArgumentsButton);
             this.Controls.Add(this.TransferButton);
             this.Controls.Add(this.UnselectAllButton);
@@ -158,7 +137,6 @@
             this.Name = "USMTMigrationGUI";
             this.Text = "USMT Migration";
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -172,8 +150,6 @@
         private System.Windows.Forms.Button UnselectAllButton;
         private System.Windows.Forms.Button TransferButton;
         private System.Windows.Forms.Button ArgumentsButton;
-        private System.Windows.Forms.Label RestoreComputerLabel;
-        private System.Windows.Forms.TextBox RestoreComputerText;
     }
 }
 

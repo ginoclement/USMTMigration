@@ -28,6 +28,7 @@ namespace USMTMigration
             TransferButton.Enabled = ArgumentsButton.Enabled = false;
             Properties.Settings.Default.ComputerName = System.Environment.MachineName;
             Properties.Settings.Default.Domain = Environment.UserDomainName;
+            
         }
 
         private void Settings_Click(object sender, EventArgs e)
@@ -41,10 +42,9 @@ namespace USMTMigration
         {
             BackupButton.Enabled = false;
             RestoreButton.Enabled = true;
+            SelectAllButton.Enabled = true;
+            UnselectAllButton.Enabled = true;
             ProfilesList.Items.Clear();
-            ProfilesList.Visible = true;
-            RestoreComputerLabel.Visible = false;
-            RestoreComputerText.Visible = false;
 
             string profilesPath = "C:\\Users\\";
             foreach(string profile in Directory.GetDirectories(profilesPath)){
@@ -64,15 +64,22 @@ namespace USMTMigration
         {
             BackupButton.Enabled = true;
             RestoreButton.Enabled = false;
-            ProfilesList.Visible = false;
-            RestoreComputerLabel.Visible = true;
-            RestoreComputerText.Visible = true;
+            SelectAllButton.Enabled = false;
+            UnselectAllButton.Enabled = false;
+            ProfilesList.Items.Clear();
 
             //List all files in the backup location
+            string restorePath = Properties.Settings.Default.BackupLoc;
+            foreach (string dirName in Directory.GetDirectories(restorePath))
+            {
+                DirectoryInfo dir = new DirectoryInfo(dirName);
+                ProfilesList.Items.Add(dir.Name);
+            }
 
             TransferButton.Enabled = ArgumentsButton.Enabled = true;
             isBackup = false;
         }
+
 
         //Select all buttons in the profile list
         private void SelectAllButton_Click(object sender, EventArgs e)
@@ -97,10 +104,10 @@ namespace USMTMigration
             //Lolz gotta love ternary operators
             //string arguments = (isBackup) ? settings.GetBackupLocation() + ((settings.OverwriteArgument()) ? " /o" : "") : "";
             string arguments = "";
-            string source = Properties.Settings.Default.LocalUSMTLoc;
+            //string source = Properties.Settings.Default.LocalUSMTLoc;
 
-            if(isBackup){
-                arguments += Properties.Settings.Default.BackupLoc + "\\";
+            if(isBackup){ 
+                arguments += "\"" + Properties.Settings.Default.BackupLoc + "\\" + Properties.Settings.Default.ComputerName + "\"";
 
                 //God this is ugly
                 //arguments += (settings.OverwriteArgument()) ? " /o" : "";
@@ -133,12 +140,12 @@ namespace USMTMigration
                 {
                     // /ui:farwest\user2
                     string temp = profile.Replace("C:\\Users\\", "");
-                    arguments += " /ui:" + Properties.Settings.Default.Domain + "\\" + temp;
+                    arguments += " /ui:\"" + Properties.Settings.Default.Domain + "\\" + temp + "\"";
                 }
             }
             else
             {
-                arguments += Properties.Settings.Default.BackupLoc + RestoreComputerText.Text;
+                arguments += Properties.Settings.Default.BackupLoc + Properties.Settings.Default.ComputerName;
                 arguments += " /all";
             }
             arguments += " " + Properties.Settings.Default.Arguments;
@@ -147,7 +154,7 @@ namespace USMTMigration
 
 
             //Debug
-            System.Diagnostics.Debug.WriteLine(arguments);
+            //System.Diagnostics.Debug.WriteLine(arguments);
 
             return arguments;
         }
@@ -162,21 +169,72 @@ namespace USMTMigration
             //Check for USMT tools
             USMTExists();
 
+            if(isBackup)
+            {
+                //Backup
+                Process migration = new Process();
+                ProcessStartInfo startInfo = new ProcessStartInfo();
+                startInfo.WorkingDirectory = Properties.Settings.Default.LocalUSMTLoc;
+                Console.WriteLine("Working Directory: " + startInfo.WorkingDirectory);
+                startInfo.FileName = "scanstate.exe";
+                Console.WriteLine("Filename: " + startInfo.FileName);
+                string arguments = GetArguments();
+                Console.WriteLine("Arguments: " + arguments);
+                startInfo.Arguments = arguments;
+                migration.StartInfo = startInfo;
+                migration.Start();
+                this.Close();
+            }
+            else
+            {
+                //Check number of selected items
+                if(ProfilesList.CheckedItems.Count > 1)
+                {
+                    MessageBox.Show("You can only restore one computer at a time");
+                }
+                else
+                {
+                    string computer = ProfilesList.CheckedItems[0].ToString();
+                    Console.WriteLine("Restoring computer: " + computer);
+                
+                    //Restore the profiles
+                    Process migration = new Process();
+                    ProcessStartInfo startInfo = new ProcessStartInfo();
+                    startInfo.WorkingDirectory = Properties.Settings.Default.LocalUSMTLoc;
+                    Console.WriteLine("Working Directory: " + startInfo.WorkingDirectory);
+                    startInfo.FileName = "loadstate.exe";
+                    Console.WriteLine("Filename: " + startInfo.FileName);
+                    //string arguments = GetArguments();
+                    //Console.WriteLine("Arguments: " + arguments);
+                    //startInfo.Arguments = arguments;
+                    migration.StartInfo = startInfo;
+                    migration.Start();
+                    this.Close();
+                }
+            }
 
-            string command = ((isBackup) ? "scanstate.exe" : "loadstate.exe") + " " + GetArguments();
-            Console.WriteLine("Command: " + command);
-            //System.Diagnostics.Process.Start("CMD.exe", command);
-            //this.Close();
 
-            Process migration = new Process();
-            ProcessStartInfo startInfo = new ProcessStartInfo();
-            startInfo.FileName = "cmd.exe";
-            startInfo.Arguments = "/C cd " + Properties.Settings.Default.LocalUSMTLoc + " & " + command + " & pause";
-            //startInfo.Arguments = "/C cd " + Properties.Settings.Default.LocalUSMTLoc + " & dir & pause & " + command + " & pause";
-            migration.StartInfo = startInfo;
-            migration.Start();
-            //This is supposed to execute Windows Logout
-            //ExitWindowsEx(0, 0);
+
+            //////////////////////////////////////////////////
+            //      Using CMD
+            //////////////////////////////////////////////////
+
+            //string command = ((isBackup) ? "scanstate.exe" : "loadstate.exe") + " " + GetArguments();
+            //Console.WriteLine("Command: " + command);
+            ////System.Diagnostics.Process.Start("CMD.exe", command);
+            ////this.Close();
+
+            //Process migration = new Process();
+            //ProcessStartInfo startInfo = new ProcessStartInfo();
+            //startInfo.FileName = "cmd.exe";
+            //startInfo.Arguments = "/C cd " + Properties.Settings.Default.LocalUSMTLoc + " & " + command + " & pause";
+            ////startInfo.Arguments = "/C cd " + Properties.Settings.Default.LocalUSMTLoc + " & dir & pause & " + command + " & pause";
+            //migration.StartInfo = startInfo;
+            //migration.Start();
+            ////This is supposed to execute Windows Logout
+            ////ExitWindowsEx(0, 0);
+
+            //////////////////////////////////////////////////
 
         }
         //Show command to be executed when transfer is clicked
