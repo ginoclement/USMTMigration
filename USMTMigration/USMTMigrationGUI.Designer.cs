@@ -104,7 +104,7 @@
             this.TransferButton.Name = "TransferButton";
             this.TransferButton.Size = new System.Drawing.Size(75, 23);
             this.TransferButton.TabIndex = 6;
-            this.TransferButton.Text = "Transfer";
+            this.TransferButton.Text = "Run";
             this.TransferButton.UseVisualStyleBackColor = true;
             this.TransferButton.Click += new System.EventHandler(this.TransferButton_Click);
             // 
@@ -116,6 +116,7 @@
             this.ArgumentsButton.TabIndex = 9;
             this.ArgumentsButton.Text = "Arguments";
             this.ArgumentsButton.UseVisualStyleBackColor = true;
+            this.ArgumentsButton.Visible = false;
             this.ArgumentsButton.Click += new System.EventHandler(this.ArgumentsButton_Click);
             // 
             // USMTMigrationGUI

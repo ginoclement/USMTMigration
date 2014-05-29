@@ -100,40 +100,19 @@ namespace USMTMigration
         }
 
         private string GetArguments()
-        {
-            //Lolz gotta love ternary operators
-            //string arguments = (isBackup) ? settings.GetBackupLocation() + ((settings.OverwriteArgument()) ? " /o" : "") : "";
+        {     
             string arguments = "";
-            //string source = Properties.Settings.Default.LocalUSMTLoc;
 
+            //Arguments specifically for backing up
             if(isBackup){ 
                 arguments += "\"" + Properties.Settings.Default.BackupLoc + "\\" + Properties.Settings.Default.ComputerName + "\"";
 
-                //God this is ugly
-                //arguments += (settings.OverwriteArgument()) ? " /o" : "";
-                //arguments += (settings.GetDate() > 0) ? " /uel:" + settings.GetDate() : ""; 
-                
+                arguments += " /ue:* ";
+
                 //Overwrite parameter
                 if (Properties.Settings.Default.Overwrite)
                 {
                     arguments += " /o";
-                }
-
-                //Days to save parameter
-                if (Properties.Settings.Default.DaysToSave > 0)
-                {
-                    arguments += " /uel:" + Properties.Settings.Default.DaysToSave;
-                }
-
-                //MigApp, MigUser, and MigDocs parameters
-                if(Properties.Settings.Default.MigApp){
-                    arguments += " /i:MigApp.xml ";
-                }
-                if(Properties.Settings.Default.MigUser){
-                    arguments += " /i:MigUser.xml ";
-                }
-                if(Properties.Settings.Default.MigDocs){
-                    arguments += " /i:MigDocs.xml ";
                 }
 
                 foreach (string profile in ProfilesList.CheckedItems)
@@ -145,10 +124,35 @@ namespace USMTMigration
             }
             else
             {
-                arguments += Properties.Settings.Default.BackupLoc + Properties.Settings.Default.ComputerName;
+                //Computer name to restore
+                arguments += Properties.Settings.Default.BackupLoc + "\\" + ProfilesList.CheckedItems[0];
+
+                //Migrate all users
                 arguments += " /all";
             }
+
+
+            //General arguments
+
+            //MigApp, MigUser, and MigDocs parameters
+            if (Properties.Settings.Default.MigApp)
+            {
+                arguments += " /i:MigApp.xml ";
+            }
+            if (Properties.Settings.Default.MigUser)
+            {
+                arguments += " /i:MigUser.xml ";
+            }
+            if (Properties.Settings.Default.MigDocs)
+            {
+                arguments += " /i:MigDocs.xml ";
+            }
+
+
+            //Any added arguments
             arguments += " " + Properties.Settings.Default.Arguments;
+
+            //Log location
             arguments += " /l:\"" + Properties.Settings.Default.LogLoc + "\\" + Properties.Settings.Default.ComputerName + ((isBackup) ? "_scan.log" : "_load.log") + "\"";
 
 
@@ -204,9 +208,9 @@ namespace USMTMigration
                     Console.WriteLine("Working Directory: " + startInfo.WorkingDirectory);
                     startInfo.FileName = "loadstate.exe";
                     Console.WriteLine("Filename: " + startInfo.FileName);
-                    //string arguments = GetArguments();
-                    //Console.WriteLine("Arguments: " + arguments);
-                    //startInfo.Arguments = arguments;
+                    string arguments = GetArguments();
+                    Console.WriteLine("Arguments: " + arguments);
+                    startInfo.Arguments = arguments;
                     migration.StartInfo = startInfo;
                     migration.Start();
                     this.Close();
@@ -254,11 +258,14 @@ namespace USMTMigration
 
             //Check to see if the target directory exists
             Console.WriteLine("Checking for USMT tools...");
-            if (!source.Exists)
+            if (!Directory.Exists(source.FullName + "\\scanstate.exe"))
             {
-                //Create directory
-                Console.WriteLine("Local USMT directory does not exist, creating...");
-                Directory.CreateDirectory(Properties.Settings.Default.LocalUSMTLoc);
+                if(!source.Exists)
+                {
+                    //Create directory
+                    Console.WriteLine("Local USMT directory does not exist, creating...");
+                    Directory.CreateDirectory(Properties.Settings.Default.LocalUSMTLoc);
+                }
                 
                 //If the source directory doesn't exist, throw an exception
                 if (!Directory.Exists(Properties.Settings.Default.RemoteUSMTLoc))

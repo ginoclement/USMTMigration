@@ -44,20 +44,16 @@
             this.LocalUSMTLocationText = new System.Windows.Forms.TextBox();
             this.DomainLabel = new System.Windows.Forms.Label();
             this.DomainText = new System.Windows.Forms.TextBox();
-            this.OlderThan = new System.Windows.Forms.NumericUpDown();
-            this.OlderThanLabel = new System.Windows.Forms.Label();
-            this.DaysLabel = new System.Windows.Forms.Label();
             this.RemoteUSMTLocationLabel = new System.Windows.Forms.Label();
             this.RemoteUSMTLocationText = new System.Windows.Forms.TextBox();
             this.MigApp = new System.Windows.Forms.CheckBox();
             this.MigUser = new System.Windows.Forms.CheckBox();
             this.MigDocs = new System.Windows.Forms.CheckBox();
-            ((System.ComponentModel.ISupportInitialize)(this.OlderThan)).BeginInit();
             this.SuspendLayout();
             // 
             // BackupLocationText
             // 
-            this.BackupLocationText.Location = new System.Drawing.Point(182, 32);
+            this.BackupLocationText.Location = new System.Drawing.Point(235, 32);
             this.BackupLocationText.Name = "BackupLocationText";
             this.BackupLocationText.Size = new System.Drawing.Size(237, 20);
             this.BackupLocationText.TabIndex = 0;
@@ -82,14 +78,14 @@
             // 
             // LogLocationText
             // 
-            this.LogLocationText.Location = new System.Drawing.Point(182, 58);
+            this.LogLocationText.Location = new System.Drawing.Point(235, 58);
             this.LogLocationText.Name = "LogLocationText";
             this.LogLocationText.Size = new System.Drawing.Size(237, 20);
             this.LogLocationText.TabIndex = 3;
             // 
             // SaveButton
             // 
-            this.SaveButton.Location = new System.Drawing.Point(263, 326);
+            this.SaveButton.Location = new System.Drawing.Point(316, 276);
             this.SaveButton.Name = "SaveButton";
             this.SaveButton.Size = new System.Drawing.Size(75, 23);
             this.SaveButton.TabIndex = 4;
@@ -99,7 +95,7 @@
             // 
             // CloseButton
             // 
-            this.CloseButton.Location = new System.Drawing.Point(344, 326);
+            this.CloseButton.Location = new System.Drawing.Point(397, 276);
             this.CloseButton.Name = "CloseButton";
             this.CloseButton.Size = new System.Drawing.Size(75, 23);
             this.CloseButton.TabIndex = 5;
@@ -109,7 +105,7 @@
             // 
             // ArgumentsText
             // 
-            this.ArgumentsText.Location = new System.Drawing.Point(182, 162);
+            this.ArgumentsText.Location = new System.Drawing.Point(235, 162);
             this.ArgumentsText.Name = "ArgumentsText";
             this.ArgumentsText.Size = new System.Drawing.Size(237, 20);
             this.ArgumentsText.TabIndex = 6;
@@ -134,7 +130,7 @@
             // 
             // ComputerNameText
             // 
-            this.ComputerNameText.Location = new System.Drawing.Point(182, 6);
+            this.ComputerNameText.Location = new System.Drawing.Point(235, 6);
             this.ComputerNameText.Name = "ComputerNameText";
             this.ComputerNameText.Size = new System.Drawing.Size(237, 20);
             this.ComputerNameText.TabIndex = 9;
@@ -142,7 +138,7 @@
             // LookUpArgumentsLabel
             // 
             this.LookUpArgumentsLabel.AutoSize = true;
-            this.LookUpArgumentsLabel.Location = new System.Drawing.Point(318, 196);
+            this.LookUpArgumentsLabel.Location = new System.Drawing.Point(371, 196);
             this.LookUpArgumentsLabel.Name = "LookUpArgumentsLabel";
             this.LookUpArgumentsLabel.Size = new System.Drawing.Size(101, 13);
             this.LookUpArgumentsLabel.TabIndex = 10;
@@ -153,7 +149,7 @@
             // OverwriteCheckbox
             // 
             this.OverwriteCheckbox.AutoSize = true;
-            this.OverwriteCheckbox.Location = new System.Drawing.Point(15, 220);
+            this.OverwriteCheckbox.Location = new System.Drawing.Point(15, 188);
             this.OverwriteCheckbox.Name = "OverwriteCheckbox";
             this.OverwriteCheckbox.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.OverwriteCheckbox.Size = new System.Drawing.Size(223, 17);
@@ -172,7 +168,7 @@
             // 
             // LocalUSMTLocationText
             // 
-            this.LocalUSMTLocationText.Location = new System.Drawing.Point(182, 84);
+            this.LocalUSMTLocationText.Location = new System.Drawing.Point(235, 84);
             this.LocalUSMTLocationText.Name = "LocalUSMTLocationText";
             this.LocalUSMTLocationText.Size = new System.Drawing.Size(237, 20);
             this.LocalUSMTLocationText.TabIndex = 13;
@@ -188,40 +184,10 @@
             // 
             // DomainText
             // 
-            this.DomainText.Location = new System.Drawing.Point(182, 136);
+            this.DomainText.Location = new System.Drawing.Point(235, 136);
             this.DomainText.Name = "DomainText";
             this.DomainText.Size = new System.Drawing.Size(237, 20);
             this.DomainText.TabIndex = 15;
-            // 
-            // OlderThan
-            // 
-            this.OlderThan.Location = new System.Drawing.Point(188, 194);
-            this.OlderThan.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.OlderThan.Name = "OlderThan";
-            this.OlderThan.Size = new System.Drawing.Size(48, 20);
-            this.OlderThan.TabIndex = 16;
-            // 
-            // OlderThanLabel
-            // 
-            this.OlderThanLabel.AutoSize = true;
-            this.OlderThanLabel.Location = new System.Drawing.Point(12, 196);
-            this.OlderThanLabel.Name = "OlderThanLabel";
-            this.OlderThanLabel.Size = new System.Drawing.Size(170, 13);
-            this.OlderThanLabel.TabIndex = 17;
-            this.OlderThanLabel.Text = "Only migrate if accessed in the last";
-            // 
-            // DaysLabel
-            // 
-            this.DaysLabel.AutoSize = true;
-            this.DaysLabel.Location = new System.Drawing.Point(242, 196);
-            this.DaysLabel.Name = "DaysLabel";
-            this.DaysLabel.Size = new System.Drawing.Size(32, 13);
-            this.DaysLabel.TabIndex = 18;
-            this.DaysLabel.Text = "days.";
             // 
             // RemoteUSMTLocationLabel
             // 
@@ -234,7 +200,7 @@
             // 
             // RemoteUSMTLocationText
             // 
-            this.RemoteUSMTLocationText.Location = new System.Drawing.Point(182, 110);
+            this.RemoteUSMTLocationText.Location = new System.Drawing.Point(235, 110);
             this.RemoteUSMTLocationText.Name = "RemoteUSMTLocationText";
             this.RemoteUSMTLocationText.Size = new System.Drawing.Size(237, 20);
             this.RemoteUSMTLocationText.TabIndex = 20;
@@ -242,7 +208,7 @@
             // MigApp
             // 
             this.MigApp.AutoSize = true;
-            this.MigApp.Location = new System.Drawing.Point(15, 243);
+            this.MigApp.Location = new System.Drawing.Point(15, 211);
             this.MigApp.Name = "MigApp";
             this.MigApp.Size = new System.Drawing.Size(80, 17);
             this.MigApp.TabIndex = 21;
@@ -252,7 +218,7 @@
             // MigUser
             // 
             this.MigUser.AutoSize = true;
-            this.MigUser.Location = new System.Drawing.Point(15, 266);
+            this.MigUser.Location = new System.Drawing.Point(15, 234);
             this.MigUser.Name = "MigUser";
             this.MigUser.Size = new System.Drawing.Size(83, 17);
             this.MigUser.TabIndex = 22;
@@ -262,7 +228,7 @@
             // MigDocs
             // 
             this.MigDocs.AutoSize = true;
-            this.MigDocs.Location = new System.Drawing.Point(15, 289);
+            this.MigDocs.Location = new System.Drawing.Point(15, 257);
             this.MigDocs.Name = "MigDocs";
             this.MigDocs.Size = new System.Drawing.Size(86, 17);
             this.MigDocs.TabIndex = 23;
@@ -271,15 +237,12 @@
             // 
             // SettingsGUI
             // 
-            this.ClientSize = new System.Drawing.Size(484, 361);
+            this.ClientSize = new System.Drawing.Size(484, 311);
             this.Controls.Add(this.MigDocs);
             this.Controls.Add(this.MigUser);
             this.Controls.Add(this.MigApp);
             this.Controls.Add(this.RemoteUSMTLocationText);
             this.Controls.Add(this.RemoteUSMTLocationLabel);
-            this.Controls.Add(this.DaysLabel);
-            this.Controls.Add(this.OlderThanLabel);
-            this.Controls.Add(this.OlderThan);
             this.Controls.Add(this.DomainText);
             this.Controls.Add(this.DomainLabel);
             this.Controls.Add(this.LocalUSMTLocationText);
@@ -300,7 +263,6 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SettingsGUI";
-            ((System.ComponentModel.ISupportInitialize)(this.OlderThan)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -324,9 +286,6 @@
         private System.Windows.Forms.TextBox LocalUSMTLocationText;
         private System.Windows.Forms.Label DomainLabel;
         private System.Windows.Forms.TextBox DomainText;
-        private System.Windows.Forms.NumericUpDown OlderThan;
-        private System.Windows.Forms.Label OlderThanLabel;
-        private System.Windows.Forms.Label DaysLabel;
         private System.Windows.Forms.Label RemoteUSMTLocationLabel;
         private System.Windows.Forms.TextBox RemoteUSMTLocationText;
         private System.Windows.Forms.CheckBox MigApp;
