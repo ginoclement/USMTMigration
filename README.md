@@ -1,12 +1,10 @@
 USMTMigration
 =============
 
-=============
 Description
-=============
+============
 This is a graphical user interface to accompany the user state migration toolkit (USMT) provided by Microsoft. It allows for backing up of user profiles to a local folder or network location and restoring from a location.
 
-=============
 Set defaults
 =============
 In order to set the default settings for the application you need to modify the USMTMigration.exe.config file. Go to <usersettings> and set the value each <setting> in <value>
@@ -25,14 +23,12 @@ MigApp: Whether to use MigApp.xml
 MigUser: Whether to use MigUser.xml
 MigDocs: Whether to use MigDocs.xml
 
-=============
 Use
-=============
+============
 Use of the application is fairly simple. Run USMTMigration.exe and enter administrator credentials (required for USMT scripts). If you want to backup profiles, click backup and check any profiles you wish to back up, otherwise click restore and select which backup to restore (backups are based on computer name).
 
-=============
 Notes
-=============
+============
 -You can get the USMT files from Windows Assessment and Deployment Kit (Windows ADK) which can be downloaded for free off Microsofts website. All you need is all the files in the folder containing scanstate.exe and loadstate.exe.
 
 -The USMT files (you know, the ones mentioned in the last note), should be the only thing in RemoteUSMTLocation. The program is specifically looking for scanstate.exe and loadstate.exe in that location, it does not check subdirectories.
