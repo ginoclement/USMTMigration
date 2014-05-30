@@ -2,11 +2,11 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="USMTMigration.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="BackupLoc" Type="System.String" Scope="User">
-      <Value Profile="(Default)">\\Some\File\Location</Value>
+    <Setting Name="BackupLocation" Type="System.String" Scope="User">
+      <Value Profile="(Default)">\\Place\To\Save\Files</Value>
     </Setting>
-    <Setting Name="LogLoc" Type="System.String" Scope="User">
-      <Value Profile="(Default)">\\Some\File\Location</Value>
+    <Setting Name="LogLocation" Type="System.String" Scope="User">
+      <Value Profile="(Default)">\\Place\To\Save\Logs</Value>
     </Setting>
     <Setting Name="Arguments" Type="System.String" Scope="User">
       <Value Profile="(Default)">/v:13 /c</Value>
@@ -17,11 +17,11 @@
     <Setting Name="Overwrite" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="LocalUSMTLoc" Type="System.String" Scope="User">
+    <Setting Name="LocalUSMTLocation" Type="System.String" Scope="User">
       <Value Profile="(Default)">C:\USMT</Value>
     </Setting>
-    <Setting Name="RemoteUSMTLoc" Type="System.String" Scope="User">
-      <Value Profile="(Default)">\\Some\File\Location</Value>
+    <Setting Name="RemoteUSMTLocation" Type="System.String" Scope="User">
+      <Value Profile="(Default)">\\Where\To\Get\USMT\Files</Value>
     </Setting>
     <Setting Name="Domain" Type="System.String" Scope="User">
       <Value Profile="(Default)" />

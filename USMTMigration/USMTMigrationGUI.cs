@@ -69,7 +69,7 @@ namespace USMTMigration
             ProfilesList.Items.Clear();
 
             //List all files in the backup location
-            string restorePath = Properties.Settings.Default.BackupLoc;
+            string restorePath = Properties.Settings.Default.BackupLocation;
             foreach (string dirName in Directory.GetDirectories(restorePath))
             {
                 DirectoryInfo dir = new DirectoryInfo(dirName);
@@ -105,7 +105,7 @@ namespace USMTMigration
 
             //Arguments specifically for backing up
             if(isBackup){ 
-                arguments += "\"" + Properties.Settings.Default.BackupLoc + "\\" + Properties.Settings.Default.ComputerName + "\"";
+                arguments += "\"" + Properties.Settings.Default.BackupLocation + "\\" + Properties.Settings.Default.ComputerName + "\"";
 
                 arguments += " /ue:* ";
 
@@ -134,7 +134,7 @@ namespace USMTMigration
             else
             {
                 //Computer name to restore
-                arguments += Properties.Settings.Default.BackupLoc + "\\" + ProfilesList.CheckedItems[0];
+                arguments += Properties.Settings.Default.BackupLocation + "\\" + ProfilesList.CheckedItems[0];
 
                 //Migrate all users
                 arguments += " /all";
@@ -161,7 +161,7 @@ namespace USMTMigration
             arguments += " " + Properties.Settings.Default.Arguments;
 
             //Log location
-            arguments += " /l:\"" + Properties.Settings.Default.LogLoc + "\\" + Properties.Settings.Default.ComputerName + ((isBackup) ? "_scan.log" : "_load.log") + "\"";
+            arguments += " /l:\"" + Properties.Settings.Default.LogLocation + "\\" + Properties.Settings.Default.ComputerName + ((isBackup) ? "_scan.log" : "_load.log") + "\"";
 
             return arguments;
         }
@@ -185,7 +185,7 @@ namespace USMTMigration
             {
                 Process migration = new Process();
                 ProcessStartInfo startInfo = new ProcessStartInfo();
-                startInfo.WorkingDirectory = Properties.Settings.Default.LocalUSMTLoc;
+                startInfo.WorkingDirectory = Properties.Settings.Default.LocalUSMTLocation;
                 Console.WriteLine("Working Directory: " + startInfo.WorkingDirectory);
                 startInfo.FileName = (isBackup) ? "scanstate.exe" : "loadstate.exe";
                 Console.WriteLine("Filename: " + startInfo.FileName);
@@ -210,8 +210,8 @@ namespace USMTMigration
         //and not found at the remote location.
         private void USMTExists()
         {
-            DirectoryInfo source = new DirectoryInfo(Properties.Settings.Default.LocalUSMTLoc);
-            DirectoryInfo target = new DirectoryInfo(Properties.Settings.Default.RemoteUSMTLoc);
+            DirectoryInfo source = new DirectoryInfo(Properties.Settings.Default.LocalUSMTLocation);
+            DirectoryInfo target = new DirectoryInfo(Properties.Settings.Default.RemoteUSMTLocation);
 
             //Check to see if the target directory exists
             Console.WriteLine("Checking for USMT tools...");
@@ -221,18 +221,18 @@ namespace USMTMigration
                 {
                     //Create directory
                     Console.WriteLine("Local USMT directory does not exist, creating...");
-                    Directory.CreateDirectory(Properties.Settings.Default.LocalUSMTLoc);
+                    Directory.CreateDirectory(Properties.Settings.Default.LocalUSMTLocation);
                 }
                 
                 //If the source directory doesn't exist, throw an exception
-                if (!Directory.Exists(Properties.Settings.Default.RemoteUSMTLoc))
+                if (!Directory.Exists(Properties.Settings.Default.RemoteUSMTLocation))
                 {
-                    throw new DirectoryNotFoundException("Source directory does not exist: " + Properties.Settings.Default.RemoteUSMTLoc);
+                    throw new DirectoryNotFoundException("Source directory does not exist: " + Properties.Settings.Default.RemoteUSMTLocation);
                 }
 
                 //Copy USMT files
                 Console.WriteLine("Copying USMT files...");
-                CopyDirectory(Properties.Settings.Default.RemoteUSMTLoc, Properties.Settings.Default.LocalUSMTLoc);
+                CopyDirectory(Properties.Settings.Default.RemoteUSMTLocation, Properties.Settings.Default.LocalUSMTLocation);
             }
             else
             {
