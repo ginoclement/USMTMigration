@@ -1,6 +1,8 @@
 USMTMigration
 =============
 
+NOTE: This project is no longer maintained consistently. If you have a feature request or would like help, please leave something in the issues section.
+
 Description
 ====
 This is a graphical user interface to accompany the user state migration toolkit (USMT) provided by Microsoft. It allows for backing up of user profiles to a local folder or network location and restoring from a location.
